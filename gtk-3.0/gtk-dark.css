@@ -95,7 +95,11 @@ textview text {
 
 textview border {
   background-color: #393939;
+<<<<<<< 3bc9120a1c94b99d40f652049ab16422b4558db5
   background-image: image(#212121);
+=======
+  background-image: image(rgba(0, 0, 0, 0.2));
+>>>>>>> Rebuild gtk-dark.css
   background-repeat: no-repeat;
   color: rgba(255, 255, 255, 0.6); }
   textview border.bottom {
@@ -944,7 +948,11 @@ toolbar {
   padding: 6px;
   border-style: solid;
   border-width: 0 1px 1px;
+<<<<<<< 3bc9120a1c94b99d40f652049ab16422b4558db5
   border-color: #212121;
+=======
+  border-color: rgba(0, 0, 0, 0.2);
+>>>>>>> Rebuild gtk-dark.css
   background-color: #393939; }
 
 searchbar,
@@ -952,8 +960,13 @@ searchbar,
   padding: 6px;
   border-style: solid;
   border-width: 0 0 1px;
+<<<<<<< 3bc9120a1c94b99d40f652049ab16422b4558db5
   border-color: #212121;
   background-color: #212121;
+=======
+  border-color: rgba(0, 0, 0, 0.2);
+  background-color: #303030;
+>>>>>>> Rebuild gtk-dark.css
   background-clip: border-box; }
 
 /***************
@@ -963,12 +976,18 @@ searchbar,
 headerbar {
   min-height: 48px;
   padding: 0 6px;
+<<<<<<< 3bc9120a1c94b99d40f652049ab16422b4558db5
   border-width: 0 0 1px;
   border-style: solid;
   border-color: #212121;
   box-shadow: inset 0 1px rgba(255, 255, 255, 0.1);
   background-color: #212121;
   background-clip: border-box; }
+=======
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.2), 0 1px 1px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  background-color: #212121;
+  color: #FFFFFF; }
+>>>>>>> Rebuild gtk-dark.css
   .titlebar:not(headerbar) .title,
   headerbar .title {
     padding-left: 12px;
@@ -1081,7 +1100,11 @@ window.csd > .titlebar:not(headerbar) {
   box-shadow: none; }
 .titlebar:not(headerbar) > separator {
   background-color: #212121;
+<<<<<<< 3bc9120a1c94b99d40f652049ab16422b4558db5
   background-image: image(#212121); }
+=======
+  background-image: image(rgba(0, 0, 0, 0.2)); }
+>>>>>>> Rebuild gtk-dark.css
 
 /************
  * Pathbars *
@@ -1106,12 +1129,12 @@ treeview.view {
   -GtkTreeView-tree-line-pattern: '';
   -GtkTreeView-expander-size: 16;
   border-left-color: alpha(currentColor, 0.3);
-  border-top-color: #212121; }
+  border-top-color: rgba(0, 0, 0, 0.2); }
   treeview.view:hover, treeview.view:active, treeview.view:selected {
     border-radius: 0; }
   treeview.view.separator {
     min-height: 5px;
-    color: #212121; }
+    color: rgba(0, 0, 0, 0.2); }
   treeview.view:drop(active) {
     border-style: solid none;
     border-width: 1px;
@@ -1158,7 +1181,7 @@ treeview.view {
     padding: 2px 6px;
     border-style: none solid solid none;
     border-width: 1px;
-    border-color: #212121;
+    border-color: rgba(0, 0, 0, 0.2);
     border-radius: 0;
     background-clip: border-box; }
     treeview.view header button, treeview.view header button:hover, treeview.view header button:active {
@@ -1172,7 +1195,7 @@ treeview.view {
     padding: 2px 6px;
     border-style: none solid solid;
     border-width: 1px;
-    border-color: #212121;
+    border-color: rgba(0, 0, 0, 0.2);
     border-radius: 0;
     box-shadow: none;
     background-color: #424242;
@@ -1186,7 +1209,10 @@ menubar,
 .menubar {
   -GtkWidget-window-dragging: true;
   padding: 0;
+<<<<<<< 3bc9120a1c94b99d40f652049ab16422b4558db5
   box-shadow: inset 0 -1px #212121;
+=======
+>>>>>>> Rebuild gtk-dark.css
   background-color: #212121; }
   menubar > menuitem,
   .menubar > menuitem {
@@ -1207,7 +1233,11 @@ menu,
   margin: 4px 0;
   padding: 4px 0;
   background-color: #424242;
+<<<<<<< 3bc9120a1c94b99d40f652049ab16422b4558db5
   border: 1px solid #212121; }
+=======
+  border: 1px solid rgba(0, 0, 0, 0.2); }
+>>>>>>> Rebuild gtk-dark.css
   .csd menu, .csd
   .menu {
     border: none;
@@ -1249,12 +1279,12 @@ menu,
     menu > arrow.top,
     .menu > arrow.top {
       margin-top: -4px;
-      border-bottom: 1px solid #212121;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.2);
       -gtk-icon-source: -gtk-icontheme("pan-up-symbolic"); }
     menu > arrow.bottom,
     .menu > arrow.bottom {
       margin-bottom: -4px;
-      border-top: 1px solid #212121;
+      border-top: 1px solid rgba(0, 0, 0, 0.2);
       -gtk-icon-source: -gtk-icontheme("pan-down-symbolic"); }
     menu > arrow:hover,
     .menu > arrow:hover {
@@ -1290,7 +1320,11 @@ popover.background {
   transition: box-shadow 0.3s cubic-bezier(0, 0, 0.2, 1);
   padding: 0;
   box-shadow: 0 3px 3px rgba(0, 0, 0, 0.16), 0 3px 3px rgba(0, 0, 0, 0.23);
+<<<<<<< 3bc9120a1c94b99d40f652049ab16422b4558db5
   background-color: #393939; }
+=======
+  background-color: #616161; }
+>>>>>>> Rebuild gtk-dark.css
   popover.background:backdrop {
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); }
   popover.background, .csd popover.background {
@@ -1315,8 +1349,13 @@ popover.background {
  *************/
 notebook > header {
   border-width: 1px;
+<<<<<<< 3bc9120a1c94b99d40f652049ab16422b4558db5
   border-color: #212121;
   background-color: #212121;
+=======
+  border-color: rgba(0, 0, 0, 0.2);
+  background-color: #303030;
+>>>>>>> Rebuild gtk-dark.css
   background-clip: border-box; }
   notebook > header.top {
     border-bottom-style: solid; }
@@ -1393,8 +1432,13 @@ notebook > header {
     notebook > header tab:hover {
       color: #FFFFFF; }
       notebook > header tab:hover.reorderable-page {
+<<<<<<< 3bc9120a1c94b99d40f652049ab16422b4558db5
         border-color: #212121;
         background-color: #303030; }
+=======
+        border-color: rgba(0, 0, 0, 0.2);
+        background-color: #393939; }
+>>>>>>> Rebuild gtk-dark.css
     notebook > header tab:disabled {
       color: rgba(255, 255, 255, 0.3); }
     notebook > header tab:checked {
@@ -1404,8 +1448,8 @@ notebook > header {
       notebook > header tab:checked:not(.reorderable-page) {
         animation: tab_ripple_effect 0.6s ease-in-out; }
       notebook > header tab:checked.reorderable-page {
-        border-color: #212121;
-        background-color: #616161; }
+        border-color: rgba(0, 0, 0, 0.2);
+        background-color: #424242; }
     notebook > header tab button.flat {
       min-width: 24px;
       min-height: 24px;
@@ -1450,13 +1494,13 @@ scrollbar {
     -GtkScrollbar-has-backward-stepper: false;
     -GtkScrollbar-has-forward-stepper: false; }
   scrollbar.top {
-    border-bottom: 1px solid #212121; }
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2); }
   scrollbar.bottom {
-    border-top: 1px solid #212121; }
+    border-top: 1px solid rgba(0, 0, 0, 0.2); }
   scrollbar.left {
-    border-right: 1px solid #212121; }
+    border-right: 1px solid rgba(0, 0, 0, 0.2); }
   scrollbar.right {
-    border-left: 1px solid #212121; }
+    border-left: 1px solid rgba(0, 0, 0, 0.2); }
   scrollbar slider {
     transition: all 0.3s cubic-bezier(0, 0, 0.2, 1), color 0, margin 0, border-width 0;
     min-width: 8px;
@@ -2062,7 +2106,11 @@ levelbar block.empty {
 *****************/
 printdialog paper {
   padding: 0;
+<<<<<<< 3bc9120a1c94b99d40f652049ab16422b4558db5
   border: 1px solid #212121;
+=======
+  border: 1px solid rgba(0, 0, 0, 0.2);
+>>>>>>> Rebuild gtk-dark.css
   background: #424242;
   color: #FFFFFF; }
 printdialog .dialog-action-box {
@@ -2075,7 +2123,7 @@ frame > border,
 .frame {
   margin: 0;
   padding: 0;
-  border: 1px solid #212121;
+  border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 0;
   box-shadow: none; }
   frame > border.flat,
@@ -2084,7 +2132,7 @@ frame > border,
 
 actionbar > revealer > box {
   padding: 6px;
-  border-top: 1px solid #212121; }
+  border-top: 1px solid rgba(0, 0, 0, 0.2); }
 
 scrolledwindow viewport.frame {
   border-style: none; }
@@ -2151,7 +2199,11 @@ scrolledwindow undershoot.right {
 scrolledwindow junction {
   border-style: solid none none solid;
   border-width: 1px;
+<<<<<<< 3bc9120a1c94b99d40f652049ab16422b4558db5
   border-color: #212121;
+=======
+  border-color: rgba(0, 0, 0, 0.2);
+>>>>>>> Rebuild gtk-dark.css
   background-color: #424242; }
   scrolledwindow junction:dir(rtl) {
     border-style: solid solid none none; }
@@ -2159,13 +2211,17 @@ scrolledwindow junction {
 separator {
   min-width: 1px;
   min-height: 1px;
-  background: #212121; }
+  background: rgba(0, 0, 0, 0.2); }
 
 /*********
  * Lists *
  *********/
 list {
+<<<<<<< 3bc9120a1c94b99d40f652049ab16422b4558db5
   border-color: #212121;
+=======
+  border-color: rgba(0, 0, 0, 0.2);
+>>>>>>> Rebuild gtk-dark.css
   background-color: #424242; }
   list row {
     padding: 2px; }
@@ -2222,7 +2278,7 @@ expander arrow {
  ***********/
 calendar {
   padding: 1px;
-  border: 1px solid #212121;
+  border: 1px solid rgba(0, 0, 0, 0.2);
   color: #FFFFFF; }
   calendar:disabled {
     color: rgba(255, 255, 255, 0.4); }
@@ -2230,7 +2286,7 @@ calendar {
     border-radius: 3px; }
   calendar.header {
     border: none;
-    border-bottom: 1px solid #212121;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 0; }
   calendar:indeterminate {
     color: alpha(currentColor, 0.4); }
@@ -2242,17 +2298,26 @@ calendar {
  * Dialogs *
  ***********/
 messagedialog.background {
+<<<<<<< 3bc9120a1c94b99d40f652049ab16422b4558db5
   background-color: #616161; }
 messagedialog .titlebar {
   min-height: 24px;
   border-style: none;
   background-color: #616161; }
+=======
+  background-color: #616161; }
+messagedialog .titlebar {
+  min-height: 24px;
+  border-style: none;
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.1);
+  background-color: #616161; }
+>>>>>>> Rebuild gtk-dark.css
 messagedialog.csd.background {
   border-bottom-left-radius: 2px;
   border-bottom-right-radius: 2px; }
 messagedialog.csd .dialog-action-area button {
   padding: 8px 16px;
-  border-top: 1px solid #212121;
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 0; }
   messagedialog.csd .dialog-action-area button:first-child {
     border-bottom-left-radius: 2px; }
@@ -2260,9 +2325,9 @@ messagedialog.csd .dialog-action-area button {
     border-bottom-right-radius: 2px; }
 
 filechooser .dialog-action-box {
-  border-top: 1px solid #212121; }
+  border-top: 1px solid rgba(0, 0, 0, 0.2); }
 filechooser #pathbarbox {
-  border-bottom: 1px solid #212121; }
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2); }
 
 filechooserbutton:drop(active) {
   box-shadow: none; }
@@ -2272,14 +2337,18 @@ filechooserbutton:drop(active) {
  ***********/
 .sidebar {
   border-style: none;
+<<<<<<< 3bc9120a1c94b99d40f652049ab16422b4558db5
   background-color: #393939; }
+=======
+  background-color: #616161; }
+>>>>>>> Rebuild gtk-dark.css
   stacksidebar.sidebar:dir(ltr) list, stacksidebar.sidebar.left list, stacksidebar.sidebar.left:dir(rtl) list, .sidebar:dir(ltr), .sidebar.left, .sidebar.left:dir(rtl) {
-    border-right: 1px solid #212121;
+    border-right: 1px solid rgba(0, 0, 0, 0.2);
     border-left-style: none; }
   stacksidebar.sidebar:dir(rtl) list
   .sidebar:dir(rtl), stacksidebar.sidebar.right list
   .sidebar:dir(rtl), .sidebar.right {
-    border-left: 1px solid #212121;
+    border-left: 1px solid rgba(0, 0, 0, 0.2);
     border-right-style: none; }
   .sidebar list {
     background-color: transparent; }
@@ -2351,13 +2420,17 @@ paned > separator {
   -gtk-icon-source: none;
   border-style: none;
   background-color: transparent;
-  background-image: image(#212121);
+  background-image: image(rgba(0, 0, 0, 0.2));
   background-size: 1px 1px; }
   paned > separator.wide {
     min-width: 6px;
     min-height: 6px;
     background-color: #303030;
+<<<<<<< 3bc9120a1c94b99d40f652049ab16422b4558db5
     background-image: image(#212121), image(#212121);
+=======
+    background-image: image(rgba(0, 0, 0, 0.2)), image(rgba(0, 0, 0, 0.2));
+>>>>>>> Rebuild gtk-dark.css
     background-size: 1px 1px, 1px 1px; }
 paned.horizontal > separator {
   background-repeat: repeat-y; }
@@ -2593,9 +2666,13 @@ button.circular {
   padding-bottom: 2px;
   padding-left: 8px;
   padding-right: 8px;
-  border: solid 1px #212121;
+  border: solid 1px rgba(0, 0, 0, 0.2);
   border-radius: 3px;
+<<<<<<< 3bc9120a1c94b99d40f652049ab16422b4558db5
   box-shadow: inset 0 -2px #212121;
+=======
+  box-shadow: inset 0 -2px rgba(0, 0, 0, 0.2);
+>>>>>>> Rebuild gtk-dark.css
   background-color: #424242;
   color: #FFFFFF;
   font-size: smaller; }
@@ -2619,7 +2696,7 @@ stackswitcher button.text-button.circular {
   padding: 0;
   border-style: solid solid none;
   border-width: 1px;
-  border-color: #212121;
+  border-color: rgba(0, 0, 0, 0.2);
   border-radius: 3px 3px 0 0;
   background-color: #424242;
   background-clip: border-box;
@@ -2704,7 +2781,7 @@ stackswitcher button.text-button.circular {
     color: #FFFFFF; }
 
 .nautilus-window searchbar {
-  border-top: 1px solid #212121; }
+  border-top: 1px solid rgba(0, 0, 0, 0.2); }
 
 .nautilus-window .searchbar-container {
   margin-top: -1px; }
@@ -2759,10 +2836,10 @@ text/foreground color of selections on backdrop windows */
 @define-color theme_unfocused_selected_fg_color #FFFFFF;
 /*
 widgets main borders color */
-@define-color borders #212121;
+@define-color borders rgba(0, 0, 0, 0.2);
 /*
 widgets main borders color on backdrop windows */
-@define-color unfocused_borders #212121;
+@define-color unfocused_borders rgba(0, 0, 0, 0.2);
 /*
 these are pretty self explicative */
 @define-color warning_color #FF6D00;
