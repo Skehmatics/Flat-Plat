@@ -17,6 +17,10 @@ $disabled_opacity: 0.4;
   @return scale-color($c, $alpha: percentage(-1 + $a));
 }
 
+// Reference URL:
+// https://material.google.com/style/color.html#color-color-palette
+// https://material.google.com/style/icons.html#icons-product-icons
+
 // Foreground colors
 $fg_color: if($variant == 'light', scale-alpha(#000000, 0.8), #FFFFFF);
 $secondary_fg_color: scale-alpha($fg_color, $enabled_opacity);
@@ -50,6 +54,8 @@ $track_color: gtkalpha(currentColor, $lower_opacity);
 $borders_color: if($variant == 'light', scale-alpha(#000000, 0.1), #212121);
 $highlight_color: if($variant == 'light', scale-alpha(#FFFFFF, 0.4), scale-alpha(#FFFFFF, 0.1));
 $secondary_highlight_color: scale-alpha(#FFFFFF, 0.2);
+
+$placeholder_text_color: mix($fg_color, $base_color, percentage($hint_opacity));
 
 $link_color: $selected_bg_color;
 $link_visited_color: #E040FB;
