@@ -521,6 +521,35 @@ StScrollBar {
     icon-size: 64px;
   }
 
+/* Access Dialog */
+.access-dialog {
+  spacing: 30px;
+}
+
+  .access-dialog-main-layout {
+    padding: 12px 20px 0;
+    spacing: 12px;
+  }
+
+  .access-dialog-content {
+    max-width: 28em;
+    spacing: 20px;
+  }
+
+  .access-dialog-icon {
+    min-width: 48px;
+    icon-size: 48px;
+  }
+
+  .access-dialog-title {
+    font-weight: bold;
+  }
+
+  .access-dialog-subtitle {
+    color: $tertiary_fg_color;
+    font-weight: bold;
+  }
+
 /* Geolocation Dialog */
 .geolocation-dialog {
   spacing: 30px;
@@ -676,6 +705,10 @@ StScrollBar {
     background-color: $track_color;
     color: $fg_color;
   }
+  .level-bar {
+    background-color: $selected_bg_color;
+    border-radius: 2px;
+  }
 }
 
 /* App Switcher */
@@ -796,7 +829,7 @@ StScrollBar {
 /* TOP BAR */
 
 #panel {
-  background-color: $bg_color;
+  background-color: $topbar_color;
   font-weight: bold;
   height: $menuitem_size;
 
@@ -984,7 +1017,7 @@ StScrollBar {
       border-radius: 100px;
       &:hover,&:focus { background-color: $semi_track_color; }
       // &:active { background-color: $track_color; }
-      &:active {
+      &:active, &:selected {
         color: $selected_fg_color;
         background-color: $selected_bg_color !important;
         border-color: transparent; //avoid jumparound due to today
@@ -1415,109 +1448,15 @@ StScrollBar {
   }
 
   .dash-label { //osd tooltip
-    min-height: 28px - 4px * 2;
+    min-height: 32px - 6px * 2;
     border-radius: 2px;
-    padding: 4px 12px;
+    padding: 6px 8px;
     color: $fg_color;
     background-color: $base_color;
     box-shadow: $z-depth-2;
     text-align: center;
     -x-offset: 8px;
   }
-
-/* Add Dash to Dock Support */
-
-#dashtodockContainer #dash {
-    background-color: $bg_color;
-}
-
-#dashtodockContainer:overview #dash {
-    background-color: $overview_bg_color;
-}
-
-#dashtodockContainer.extended:overview #dash {
-    background-color: transparent;
-}
-
-#dashtodockContainer.left #dash,
-#dashtodockContainer.right #dash {
-    padding: 3px 0;
-}
-
-#dashtodockContainer.top #dash,
-#dashtodockContainer.bottom #dash {
-    padding: 0 3px;
-}
-
-#dashtodockContainer.extended #dash {
-    padding: 0;
-    border-radius: 0;
-}
-
-#dashtodockContainer.left .dash-item-container > StWidget,
-#dashtodockContainer.right .dash-item-container > StWidget,
-#dashtodockContainer.extended.left .dash-item-container > StWidget,
-#dashtodockContainer.extended.right .dash-item-container > StWidget {
-   padding: 3px 6px;
-}
-
-#dashtodockContainer.extended.left .dash-item-container:first-child > StWidget,
-#dashtodockContainer.extended.right .dash-item-container:first-child > StWidget {
-   padding: 6px 6px 3px 6px;
-}
-
-#dashtodockContainer.extended.left .dash-item-container:last-child > StWidget,
-#dashtodockContainer.extended.right .dash-item-container:last-child > StWidget {
-   padding: 3px 6px 6px 6px;
-}
-
-#dashtodockContainer.top .dash-item-container > StWidget,
-#dashtodockContainer.bottom .dash-item-container > StWidget,
-#dashtodockContainer.extended.top .dash-item-container > StWidget,
-#dashtodockContainer.extended.bottom .dash-item-container > StWidget {
-   padding: 6px 3px;
-}
-
-#dashtodockContainer.extended.top .dash-item-container:first-child > StWidget,
-#dashtodockContainer.extended.bottom .dash-item-container:first-child > StWidget {
-   padding: 6px 3px 6px 6px;
-}
-
-#dashtodockContainer.extended.top .dash-item-container:last-child > StWidget,
-#dashtodockContainer.extended.bottom .dash-item-container:last-child > StWidget {
-   padding: 6px 6px 6px 3px;
-}
-
-#dashtodockContainer .app-well-app-running-dot {
-    background-color: transparent;
-}
-
-#dashtodockContainer .dash-item-container > StWidget {
-    background-size: cover;
-}
-
-@each $p,$pt in ('.left', 'left'),
-                ('.right', 'right'),
-                ('.top', 'top'),
-                ('.bottom', 'bottom') {
-  @each $n,$nb in ('.running1','running1'),
-                  ('.running2','running2'),
-                  ('.running3','running3'),
-                  ('.running4','running4') {
-    @each $f,$fc in ('',''),
-                    ('.focused','-focused') {
-      #dashtodockContainer#{$p} .dash-item-container > StWidget#{$n}#{$f} {
-          background-image: url("assets/#{$pt}-#{$nb}#{$fc}.svg");
-      }
-    }
-  }
-}
-
-/* Add Simple Dock Support */
-
-#dash:desktop {
-    background-color: $bg_color;
-}
 
   /* App Vault/Grid */
   .icon-grid {
@@ -1712,28 +1651,6 @@ StScrollBar {
 %status_text {
   @include font(display-2);
   color: $tertiary_selected_fg_color;
-}
-
-/* Add Dash to Dock Support */
-
-#workspacestodockContainer .workspace-thumbnails {
-    background-color: $bg_color;
-}
-
-#workspacestodockContainer:overview .workspace-thumbnails {
-    background-color: $overview_bg_color;
-}
-
-#workspacestodockContainer.fullheight:overview .workspace-thumbnails {
-    background-color: transparent;
-}
-
-#workspacestodockContainer.right .workspace-thumbnails {
-    border-radius: 2px 0 0 2px;
-}
-
-#workspacestodockContainer.left .workspace-thumbnails {
-    border-radius: 0 2px 2px 0;
 }
 
 /* NOTIFICATIONS & MESSAGE TRAY */
