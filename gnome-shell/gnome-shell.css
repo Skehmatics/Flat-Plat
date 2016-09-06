@@ -26,7 +26,6 @@ stage {
   font-family: "M+ 1c", Roboto, Cantarell, Sans-Serif;
   font-size: 10.5pt;
   font-weight: 400;
-  line-height: 24px;
   color: #FFFFFF; }
 
 /* WIDGETS */
@@ -38,7 +37,6 @@ stage {
   border-radius: 2px;
   font-size: 10.5pt;
   font-weight: 500;
-  line-height: 1;
   color: rgba(255, 255, 255, 0.75);
   background-color: transparent;
   border-color: transparent;
@@ -79,7 +77,6 @@ stage {
   border-right-width: 0;
   font-size: 10.5pt;
   font-weight: 500;
-  line-height: 1;
   color: rgba(255, 255, 255, 0.75);
   background-color: transparent;
   border-color: transparent;
@@ -132,7 +129,6 @@ StEntry {
   selected-color: #FFFFFF;
   font-size: 12pt;
   font-weight: 400;
-  line-height: 24px;
   background-color: rgba(48, 48, 48, 0.01);
   border-color: transparent;
   box-shadow: inset 0 -1px rgba(255, 255, 255, 0.3); }
@@ -250,8 +246,7 @@ StScrollBar {
 /* Modal Dialogs */
 .headline {
   font-size: 15pt;
-  font-weight: 500;
-  line-height: 1; }
+  font-weight: 500; }
 
 .lightbox {
   background-color: black; }
@@ -285,8 +280,7 @@ StScrollBar {
 .mount-question-dialog-subject,
 .end-session-dialog-subject {
   font-size: 15pt;
-  font-weight: 500;
-  line-height: 1; }
+  font-weight: 500; }
 
 /* End Session Dialog */
 .end-session-dialog {
@@ -425,7 +419,6 @@ StScrollBar {
 .prompt-dialog-headline {
   font-size: 15pt;
   font-weight: 500;
-  line-height: 1;
   color: #FFFFFF; }
 
 .prompt-dialog-description:rtl {
@@ -640,8 +633,7 @@ StScrollBar {
   min-height: 64px; }
   .osd-window .osd-monitor-label {
     font-size: 45px;
-    font-weight: 400;
-    line-height: 48px; }
+    font-weight: 400; }
   .osd-window .level {
     height: 0.6em;
     border-radius: 4px;
@@ -692,7 +684,6 @@ StScrollBar {
 .input-source-switcher-symbol {
   font-size: 45px;
   font-weight: 400;
-  line-height: 48px;
   width: 96px;
   height: 96px; }
 
@@ -846,8 +837,7 @@ StScrollBar {
 
 .datemenu-today-button .date-label {
   font-size: 18pt;
-  font-weight: 400;
-  line-height: 32px; }
+  font-weight: 400; }
 
 .world-clocks-header,
 .message-list-section-title {
@@ -893,7 +883,6 @@ StScrollBar {
 .calendar-day-base {
   font-size: 9pt;
   font-weight: 400;
-  line-height: 1;
   text-align: center;
   width: 32px;
   height: 32px;
@@ -916,7 +905,6 @@ StScrollBar {
     color: rgba(255, 255, 255, 0.6);
     font-size: 9pt;
     font-weight: 400;
-    line-height: 1;
     font-weight: bold;
     text-align: center; }
 
@@ -1076,8 +1064,8 @@ StScrollBar {
     color: rgba(255, 255, 255, 0.6); }
 
 .system-switch-user-submenu-icon.user-icon {
-  icon-size: 24px;
-  padding: 0 0; }
+  icon-size: 20px;
+  padding: 0 2px; }
 
 .system-switch-user-submenu-icon.default-icon {
   icon-size: 16px;
@@ -1172,18 +1160,22 @@ StScrollBar {
   icon-size: 32px; }
 
 .nm-dialog-scroll-view {
-  border: 2px solid rgba(0, 0, 0, 0.2); }
+  border: none; }
 
 .nm-dialog-header {
-  font-weight: bold; }
+  font-size: 15pt;
+  font-weight: 500; }
 
 .nm-dialog-item {
-  font-size: 12pt;
-  font-weight: 400;
-  line-height: 24px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  font-size: 1em;
+  border-bottom: none;
+  border-radius: 2px;
   padding: 12px;
   spacing: 20px; }
+  .nm-dialog-item:hover, .nm-dialog-item:focus {
+    background-color: rgba(255, 255, 255, 0.15); }
+  .nm-dialog-item:active {
+    background-color: rgba(255, 255, 255, 0.3); }
 
 .nm-dialog-item:selected {
   background-color: #42A5F5;
@@ -1287,7 +1279,6 @@ StScrollBar {
 .list-search-result-title {
   font-size: 18pt;
   font-weight: 400;
-  line-height: 32px;
   color: #FFFFFF; }
 
 .list-search-result-description {
@@ -1324,9 +1315,8 @@ StScrollBar {
   padding: 3px 6px; }
 
 .dash-label {
-  min-height: 20px;
   border-radius: 2px;
-  padding: 6px 8px;
+  padding: 7px 8px;
   color: #FFFFFF;
   background-color: #303030;
   box-shadow: 0 3px 3px rgba(0, 0, 0, 0.24), 0 3px 3px rgba(0, 0, 0, 0.345);
@@ -1502,7 +1492,6 @@ StScrollBar {
 .search-statustext, .no-frequent-applications-label {
   font-size: 45px;
   font-weight: 400;
-  line-height: 48px;
   color: rgba(255, 255, 255, 0.6); }
 
 /* NOTIFICATIONS & MESSAGE TRAY */
@@ -1597,7 +1586,6 @@ StScrollBar {
   padding-left: 4px;
   font-size: 9pt;
   font-weight: 400;
-  line-height: 1;
   color: rgba(255, 255, 255, 0.6); }
   .chat-meta-message:rtl {
     padding-left: 0;
@@ -1941,7 +1929,7 @@ StScrollBar {
 
 .login-dialog-user-list-item {
   border-radius: 2px;
-  padding: .2em;
+  padding: 4px 4px 0;
   color: rgba(255, 255, 255, 0.75); }
   .login-dialog-user-list-item:ltr {
     padding-right: 1em; }
@@ -1965,7 +1953,6 @@ StScrollBar {
   color: #FFFFFF;
   font-size: 15pt;
   font-weight: 500;
-  line-height: 1;
   text-align: left;
   padding-left: 15px; }
 
@@ -2015,13 +2002,11 @@ StScrollBar {
 .screen-shield-clock-time {
   font-size: 112px;
   font-weight: 300;
-  line-height: 1;
   text-shadow: 0 1px 1.5px rgba(0, 0, 0, 0.12), 0 1px 1px rgba(0, 0, 0, 0.24); }
 
 .screen-shield-clock-date {
   font-size: 45px;
-  font-weight: 400;
-  line-height: 48px; }
+  font-weight: 400; }
 
 .screen-shield-notifications-container {
   spacing: 6px;
@@ -2126,7 +2111,6 @@ StScrollBar {
   border-radius: 2px;
   font-size: 10.5pt;
   font-weight: 500;
-  line-height: 1;
   color: rgba(255, 255, 255, 0.75);
   background-color: transparent;
   border-color: transparent;
@@ -2176,8 +2160,7 @@ StScrollBar {
 
 .lg-extension-name {
   font-size: 18pt;
-  font-weight: 400;
-  line-height: 32px; }
+  font-weight: 400; }
 
 .lg-extension-meta {
   spacing: 6px; }
