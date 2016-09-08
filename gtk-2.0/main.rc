@@ -1650,12 +1650,12 @@ style "default" {
 
 style "menubar" {
 
-  fg[NORMAL]   = mix(0.75, @selected_fg_color, @headerbar_color)
+  fg[NORMAL]   = mix(0.75, @fg_color, @headerbar_color)
   bg[NORMAL]   = @headerbar_color
-  fg[PRELIGHT] = @selected_fg_color
+  fg[PRELIGHT] = @fg_color
   # Needed to fix Firefox's menubar text
-  bg[SELECTED] = mix(0.15, @selected_fg_color, @headerbar_color)
-  fg[SELECTED] = @selected_fg_color
+  bg[SELECTED] = mix(0.15, @fg_color, @headerbar_color)
+  fg[SELECTED] = @fg_color
 
 }
 
@@ -1664,9 +1664,9 @@ style "menubar_item" {
   xthickness = 3
   ythickness = 4
 
-  fg[NORMAL]   = mix(0.75, @selected_fg_color, @headerbar_color)
-  bg[PRELIGHT] = mix(0.15, @selected_fg_color, @headerbar_color)
-  fg[PRELIGHT] = @selected_fg_color
+  fg[NORMAL]   = mix(0.75, @fg_color, @headerbar_color)
+  bg[PRELIGHT] = mix(0.15, @fg_color, @headerbar_color)
+  fg[PRELIGHT] = @fg_color
 
 }
 
