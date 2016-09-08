@@ -977,10 +977,10 @@ headerbar {
   padding: 0 $container_padding;
   box-shadow: $z-depth-1, inset 0 1px $secondary_highlight_color;
   background-color: $headerbar_color;
-  color: $inversed_fg_color;
+  color: $fg_color;
 
   &:backdrop {
-    color: $secondary_inversed_fg_color;
+    color: $secondary_fg_color;
   }
 
   .title {
