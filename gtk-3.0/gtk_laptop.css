@@ -1124,15 +1124,15 @@ menubar,
     transition: all 0.2s cubic-bezier(0, 0, 0.2, 1);
     min-height: 20px;
     padding: 4px 8px;
-    color: rgba(255, 255, 255, 0.75); }
+    color: rgba(0, 0, 0, 0.6); }
     menubar > menuitem:hover,
     .menubar > menuitem:hover {
       transition: none;
       background-color: alpha(currentColor, 0.15);
-      color: #FFFFFF; }
+      color: rgba(0, 0, 0, 0.8); }
     menubar > menuitem:disabled,
     .menubar > menuitem:disabled {
-      color: rgba(255, 255, 255, 0.3); }
+      color: rgba(0, 0, 0, 0.32); }
 
 menu,
 .menu,
