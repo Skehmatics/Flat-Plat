@@ -11,7 +11,7 @@
 
 // Budgie Menu
 .budgie-menu {
-  padding : 0;
+  &.background { padding: 0; }
 
   scrolledwindow:not(.categories) { background-color: $base_color; }
 
@@ -165,7 +165,7 @@ frame.raven-frame > border {
   box-shadow: $z-depth-4;
 }
 
-$pos_list: ((top, bottom),(bottom,top),(left,right),(right,left));
+$pos_list: ((top, bottom), (bottom, top), (left, right), (right, left));
 
 @each $pos, $b_pos in $pos_list {
   // Panel borders
@@ -217,8 +217,8 @@ $pos_list: ((top, bottom),(bottom,top),(left,right),(right,left));
         @extend %simple_flat_button;
 
         &.image-button {
-          -gtk-outline-radius: $circular_radius;
           border-radius: $circular_radius;
+          -gtk-outline-radius: $circular_radius;
         }
       }
     }
@@ -312,6 +312,16 @@ calendar.raven-calendar {
   .notification-title { font-size: 120%; }
 
   .notification-body { @extend .dim-label; }
+}
+
+// On Screen Display in Budgie
+.budgie-osd-window {
+  @extend .budgie-notification-window;
+}
+
+// Internal part of the OSD
+.budgie-osd {
+  .budgie-osd-text { font-size: 120%; }
 }
 
 .drop-shadow {
