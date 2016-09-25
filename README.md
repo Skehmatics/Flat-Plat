@@ -14,23 +14,27 @@ Features
 
 Requirements
 ------------
-* GTK+ 3.14, 3.16, 3.18 or 3.20
+* GTK+ 3.14, 3.16, 3.18, 3.20 or 3.22
 * `gnome-themes-standard`
 * pixmap (or pixbuf) engine
 * murrine engine
 
 ##### Supported desktop environments are:
-* GNOME Shell 3.14, 3.16, 3.18 or 3.20
+* GNOME Shell 3.14, 3.16, 3.18, 3.20 or 3.22
 * Unity 7.4 (Ubuntu 16.04)
+* Budgie 10.2.5 or later
+* MATE 1.14 or later
 
 Installation
 ------------
 1. Download an archive.
-  * [v3.20.20160821](https://github.com/nana-4/Flat-Plat/releases/download/v3.20.20160821/Flat-Plat-3.20.20160821.tar.gz) for GNOME 3.20
-  * [v3.20.20160821](https://github.com/nana-4/Flat-Plat/releases/download/v3.20.20160821/Flat-Plat-laptop-3.20.20160821.tar.gz) for GNOME 3.20 and small resolution
-  * [v3.18.20160821](https://github.com/nana-4/Flat-Plat/releases/download/v3.18.20160821/Flat-Plat-3.18.20160821.tar.gz) for GNOME 3.18 or Unity 7.4 (Ubuntu 16.04)
+  * [v3.22.20160921](https://github.com/nana-4/Flat-Plat/releases/download/v3.22.20160921/Flat-Plat-3.22.20160921.tar.gz) for GNOME 3.22
+  * [v3.22.20160921](https://github.com/nana-4/Flat-Plat/releases/download/v3.22.20160921/Flat-Plat-laptop-3.22.20160921.tar.gz) for GNOME 3.22 and small resolution
+  * [v3.20.20160921](https://github.com/nana-4/Flat-Plat/releases/download/v3.20.20160921/Flat-Plat-3.20.20160921.tar.gz) for GNOME 3.20, Budgie 10.2.x or MATE 1.14
+  * [v3.20.20160921](https://github.com/nana-4/Flat-Plat/releases/download/v3.20.20160921/Flat-Plat-laptop-3.20.20160921.tar.gz) for GNOME 3.20, Budgie 10.2.x or MATE 1.14 and small resolution
+  * [v3.18.20160921](https://github.com/nana-4/Flat-Plat/releases/download/v3.18.20160921/Flat-Plat-3.18.20160921.tar.gz) for GNOME 3.18 or Unity 7.4 (Ubuntu 16.04)
   * [v3.16.20160821](https://github.com/nana-4/Flat-Plat/releases/download/v3.16.20160821/Flat-Plat-3.16.20160821.tar.gz) for GNOME 3.16
-  * [v3.14.20160821](https://github.com/nana-4/Flat-Plat/releases/download/v3.14.20160821/Flat-Plat-3.14.20160821.tar.gz) for GNOME 3.14
+  * [v3.14.20160921](https://github.com/nana-4/Flat-Plat/releases/download/v3.14.20160921/Flat-Plat-3.14.20160921.tar.gz) for GNOME 3.14
 2. Extract it to the theme directory.
   * For system-wide installation to `/usr/share/themes`
   * For user-specific installation to `~/.themes`
@@ -39,7 +43,7 @@ Installation
 5. [Optional] Open the `chrome` folder and drag and drop the `.crx` files onto the Chrome/Chromium extensions page (`chrome://extensions/`).
 
 #### Note if you want to clone from the repository
-The `master` branch is currently being built for GNOME 3.20.  
+The `master` branch is currently being built for GNOME 3.22.  
 If you want to use [other versions](https://github.com/nana-4/Flat-Plat/branches/all), you need to specify the branch as follows:
 
     git clone -b 3.18 https://github.com/nana-4/Flat-Plat.git
