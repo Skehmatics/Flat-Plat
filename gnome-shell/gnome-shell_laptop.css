@@ -741,7 +741,7 @@ StScrollBar {
 
 /* TOP BAR */
 #panel {
-  background-color: #263238;
+  background-color: #000000;
   font-weight: bold;
   height: 28px; }
   #panel:overview, #panel.unlock-screen, #panel.login-screen, #panel.lock-screen {
