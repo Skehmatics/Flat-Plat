@@ -40,13 +40,13 @@ $disabled_secondary_titlebar_fg_color: if($titlebar == 'dark', $disabled_seconda
 $disabled_tertiary_titlebar_fg_color: if($titlebar == 'dark', $disabled_tertiary_inverse_fg_color, $disabled_tertiary_fg_color);
 
 // Background colors
-$bg_color: if($variant == 'light', $grey_100, $grey_700);
-$base_color: if($variant == 'light', $white, $grey_600);
+$bg_color: if($variant == 'light', $grey_100, #303030);
+$base_color: if($variant == 'light', $white, $grey_800);
 $alt_base_color: if($variant == 'light', $grey_50, mix($base_color, $bg_color, 50%));
-$lighter_bg_color: if($variant == 'light', $grey_50, $grey_500);
+$lighter_bg_color: if($variant == 'light', $grey_50, $grey_700);
 $darker_bg_color: if($variant == 'light', $grey_200, $grey_900);
 
-$titlebar_bg_color: if($variant == 'light', if($titlebar == 'dark', $grey_700, $grey_300), $grey_800);
+$titlebar_bg_color: if($variant == 'light', if($titlebar == 'dark', $blue_grey_700, $grey_300), $grey_900);
 $alt_titlebar_bg_color: if($titlebar == 'dark', $grey_800, $grey_400);
 $panel_bg_color: if($titlebar == 'dark', $grey_900, $grey_400);
 
