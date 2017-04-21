@@ -12,7 +12,7 @@ fi
 echo
 
 # Not enabled color: '-dark'
-for color in '' '-light' ; do
+for color in '' '-light' '-dark'; do
 	for size in '' '-compact' ; do
 		echo Installing Flat-Plat${color}${size} ...
 
@@ -48,15 +48,16 @@ for color in '' '-light' ; do
 			no-notifications.svg \
 			process-working.svg \
 			${themedir}/gnome-shell
-		if [ "$color" == '-dark' ] ; then
-			cp -ur \
-				assets${color} \
-				${themedir}/gnome-shell/assets
-		else
+		# TODO: Enable when avalible from upstream
+		# if [ "$color" == '-dark' ] ; then
+		# 	cp -ur \
+		# 		assets${color} \
+		# 		${themedir}/gnome-shell/assets
+		# else
 			cp -ur \
 				assets \
 				${themedir}/gnome-shell
-		fi
+		# fi
 		cp -ur \
 			gnome-shell${color}${size}.css \
 			${themedir}/gnome-shell/gnome-shell.css
@@ -72,15 +73,16 @@ for color in '' '-light' ; do
 			apps.rc \
 			main.rc \
 			${themedir}/gtk-2.0
-		if [ "$color" == '-dark' ] ; then
-			cp -ur \
-				assets${color} \
-				${themedir}/gtk-2.0/assets
-		else
+		# TODO: Enable when avalible from upstream
+		# if [ "$color" == '-dark' ] ; then
+		# 	cp -ur \
+		# 		assets${color} \
+		# 		${themedir}/gtk-2.0/assets
+		# else
 			cp -ur \
 				assets \
 				${themedir}/gtk-2.0
-		fi
+		# fi
 		cp -ur \
 			gtkrc${color} \
 			${themedir}/gtk-2.0/gtkrc
