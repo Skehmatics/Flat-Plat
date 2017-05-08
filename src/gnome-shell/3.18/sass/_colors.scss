@@ -5,6 +5,10 @@
   @return scale-color($c, $alpha: percentage(-1 + $a));
 }
 
+@function chroma($c) {
+  @return mix($c, $grey_800, 75%);
+}
+
 @import 'color-palette';
 
 // Foreground colors
