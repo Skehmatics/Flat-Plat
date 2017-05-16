@@ -88,6 +88,8 @@ notebook:focus tab,
 
   &:disabled { color: $disabled_fg_color; }
 
+  &:hover, &:active, &:selected { border-radius: 2px; }
+
   selection,
   &:selected { @extend %selected_items; }
 }
@@ -96,11 +98,13 @@ textview {
   // FIXME: we need to override background-color to ensure text rendering
   text { background-color: $base_color; }
 
-  // FIXME: we cannot specify text color for the border node
-  border { background-color: $alt_base_color; }
+  border {
+    background-color: $alt_base_color;
+    color: $tertiary_fg_color; // FIXME: not working
+  }
 }
 
-iconview { border-radius: 2px; }
+// iconview { @extend .view; }
 
 .rubberband,
 rubberband {
@@ -114,7 +118,6 @@ flowbox {
   flowboxchild {
     padding: 4px;
     border-radius: 2px;
-    // outline-offset: -2px;
 
     &:selected { @extend %selected_items; }
   }
@@ -190,13 +193,6 @@ assistant {
   to { -gtk-icon-transform: rotate(1turn); }
 }
 
-@keyframes spin_colors {
-  1% { color: $info_bg_color; } 25% { color: $info_bg_color; }
-  26% { color: $question_bg_color; } 50% { color: $question_bg_color; }
-  51% { color: $warning_bg_color; } 75% { color: $warning_bg_color; }
-  76% { color: $error_bg_color; } 100% { color: $error_bg_color; }
-}
-
 spinner {
   background: none;
   opacity: 0; // non spinning spinner makes no sense
@@ -204,7 +200,7 @@ spinner {
 
   &:checked {
     opacity: 1;
-    animation: spin 1s linear infinite, spin_colors 4s linear infinite;
+    animation: spin 1s linear infinite;
 
     &:disabled { opacity: $disabled_opacity; }
   }
@@ -250,9 +246,15 @@ entry {
 
       &:disabled { color: gtkalpha(currentColor, $tertiary_opacity); }
 
-      &.left { margin-left: 2px; margin-right: 6px; }
+      &.left {
+        margin-left: ($medium_size - 16px) / 2 - 8px;
+        margin-right: 6px;
+      }
 
-      &.right { margin-left: 6px; margin-right: 2px; }
+      &.right {
+        margin-left: 6px;
+        margin-right: ($medium_size - 16px) / 2 - 8px;
+      }
     }
 
     undershoot {
@@ -318,6 +320,43 @@ treeview entry {
       border-image: none;
       box-shadow: none;
     }
+  }
+}
+
+.entry-tag {
+  $tag_height: 24px;
+  $tag_margin: ($medium_size - $tag_height) / 2;
+
+  margin: $tag_margin; // instead of min-height: $tag_height;
+  border-radius: $circular_radius;
+  box-shadow: none;
+  background-color: $primary_color;
+  color: $inverse_fg_color;
+
+  &:hover { box-shadow: $shadow_1; }
+
+  // side margins: compensate the entry padding with a negative margin
+  // then the negative margin itself
+  :dir(ltr) & {
+    margin-left: 8px;
+    margin-right: $tag_margin - 8px;
+    padding-left: 8px;
+    padding-right: ($tag_height - 16px) / 2;
+  }
+
+  :dir(rtl) & {
+    margin-left: $tag_margin - 8px;
+    margin-right: 8px;
+    padding-left: ($tag_height - 16px) / 2;
+    padding-right: 8px;
+  }
+
+  // seems any sizing doesn't work
+  &.button {
+    box-shadow: none;
+    background-color: transparent;
+
+    &:not(:hover):not(:active) { color: $secondary_inverse_fg_color; }
   }
 }
 
@@ -390,10 +429,13 @@ button {
       min-width: 24px;
       padding: ($medium_size - 24px) / 2;
 
-      &:not(.text-button) { @extend %circular_button; }
+      @extend %circular_button;
     }
 
     &.text-button.image-button {
+      border-radius: 2px;
+      -gtk-outline-radius: 2px;
+
       label {
         &:first-child { margin-left: 16px - ($medium_size - 24px) / 2; }
 
@@ -411,7 +453,12 @@ button {
     .linked.vertical > &.flat {
       border-radius: 2px;
 
-      &.image-button:not(.text-button) { @extend %circular_button; }
+      &.image-button { @extend %circular_button; }
+
+      &.text-button.image-button {
+        border-radius: 2px;
+        -gtk-outline-radius: 2px;
+      }
     }
 
     &:drop(active) {
@@ -557,40 +604,60 @@ button {
 }
 
 // More inline toolbar buttons
-toolbar.inline-toolbar toolbutton:not(:only-child) {
+toolbar.inline-toolbar toolbutton {
   // > button.flat { @extend %linked_middle; }
 
-  // &:first-child > button.flat { @extend %linked_first; }
+  // &:first-child > button.flat { @extend %linked:first-child; }
 
-  // &:last-child > button.flat { @extend %linked_last; }
+  // &:last-child > button.flat { @extend %linked:last-child; }
+
+  // &:only-child > button.flat { @extend %linked:only-child; }
 }
 
-%linked:not(:only-child) {
-  @at-root %linked_middle,
-  & {
-    border-radius: 0;
-    -gtk-outline-radius: 2px;
-  }
-
-  @at-root %linked_first,
-  &:first-child { border-radius: 2px 0 0 2px; }
-
-  @at-root %linked_last,
-  &:last-child { border-radius: 0 2px 2px 0; }
+%linked_middle {
+  border-radius: 0;
+  -gtk-outline-radius: 2px;
 }
 
-%linked_vertical:not(:only-child) {
-  @at-root %linked_vertical_middle,
-  & {
-    border-radius: 0;
-    -gtk-outline-radius: 2px;
+%linked {
+  @extend %linked_middle;
+
+  &:first-child {
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
   }
 
-  @at-root %linked_vertical_first,
-  &:first-child { border-radius: 2px 2px 0 0; }
+  &:last-child {
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+  }
 
-  @at-root %linked_vertical_last,
-  &:last-child { border-radius: 0 0 2px 2px; }
+  &:only-child {
+    border-radius: 2px;
+  }
+}
+
+%linked_vertical_middle {
+  border-radius: 0;
+  -gtk-outline-radius: 2px;
+}
+
+%linked_vertical {
+  @extend %linked_vertical_middle;
+
+  &:first-child {
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+  }
+
+  &:last-child {
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+  }
+
+  &:only-child {
+    border-radius: 2px;
+  }
 }
 
 /* menu buttons */
@@ -814,20 +881,24 @@ combobox {
 // work, special case needed. See
 // https://bugzilla.gnome.org/show_bug.cgi?id=733979
 
-.linked:not(.vertical) > combobox:not(:only-child) {
+.linked:not(.vertical) > combobox {
   > box > button.combo { @extend %linked_middle; }
 
-  &:first-child > box > button.combo { @extend %linked_first; }
+  &:first-child > box > button.combo { @extend %linked:first-child; }
 
-  &:last-child > box > button.combo { @extend %linked_last; }
+  &:last-child > box > button.combo { @extend %linked:last-child; }
+
+  &:only-child > box > button.combo { @extend %linked:only-child; }
 }
 
-.linked.vertical > combobox:not(:only-child) {
+.linked.vertical > combobox {
   > box > button.combo { @extend %linked_vertical_middle; }
 
-  &:first-child > box > button.combo { @extend %linked_vertical_first; }
+  &:first-child > box > button.combo { @extend %linked_vertical:first-child; }
 
-  &:last-child > box > button.combo { @extend %linked_vertical_last; }
+  &:last-child > box > button.combo { @extend %linked_vertical:last-child; }
+
+  &:only-child > box > button.combo { @extend %linked_vertical:only-child; }
 }
 
 %combo_flat {
@@ -953,6 +1024,8 @@ headerbar {
 
     @extend .dim-label;
   }
+
+  .linked:not(.vertical) > entry:not(.flat) { border-radius: 2px; }
 
   button:not(.suggested-action):not(.destructive-action) {
     @extend %button_basic.flat;
@@ -1177,6 +1250,8 @@ treeview.view {
 
   rubberband { @extend rubberband; } // to avoid borders being overridden by the previously set props
 
+  &:hover, &:active, &:selected { border-radius: 0; }
+
   &.separator {
     min-height: 1px + 2px * 2;
     color: $border_color;
@@ -1293,12 +1368,12 @@ menubar,
   }
 }
 
-.csd.popup { border-radius: 2px; }
+.csd.popup { background-color: transparent; }
 
 menu,
 .menu,
 .context-menu {
-  margin: 4px 0;
+  margin: 4px 0; // See https://bugzilla.gnome.org/show_bug.cgi?id=591258
   padding: 4px 0;
   box-shadow: inset 0 1px $highlight_color;
   background-color: $base_color;
@@ -2740,6 +2815,8 @@ messagedialog { // Message Dialog styling
       &:last-child { border-bottom-right-radius: 2px; }
     }
   }
+
+  entry { @extend %entry.flat; }
 }
 
 filechooser {
