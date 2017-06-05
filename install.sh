@@ -3,8 +3,17 @@
 repodir=$(cd $(dirname $0) && pwd)
 srcdir=${repodir}/src
 
-if type -p gnome-shell > /dev/null ; then
-  gnomever=$(gnome-shell --version | cut -d ' ' -f 3 | cut -d . -f -2)
+gnomever_major=$(gnome-shell --version | cut -d ' ' -f 3 | cut -d . -f 1)
+gnomever_minor=$(gnome-shell --version | cut -d ' ' -f 3 | cut -d . -f 2)
+
+if [ -z $gnomever_minor ]; then
+  gnomever=3.18
+elif [ -e ${srcdir}/gnome-shell/$gnomever_major.$gnomever_minor ]; then
+  gnomever=$gnomever_major.$gnomever_minor
+elif [ -e ${srcdir}/gnome-shell/$gnomever_major.$(($gnomever_minor + 1)) ]; then
+  gnomever=$gnomever_major.$(($gnomever_minor + 1))
+elif [ -e ${srcdir}/gnome-shell/$gnomever_major.$(($gnomever_minor - 1)) ]; then
+  gnomever=$gnomever_major.$(($gnomever_minor - 1))
 else
   gnomever=3.18
 fi
