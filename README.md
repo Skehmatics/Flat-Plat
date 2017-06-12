@@ -1,7 +1,7 @@
 Flat-Plat
 =========
 Flat-Plat is a [Material Design](https://material.io)-like theme for GNOME/GTK+ based desktop environments.  
-It supports GTK3, GTK2, Metacity, GNOME Shell, Unity, MATE, LightDM, GDM, Chrome theme, etc.
+It supports GTK3, GTK2, Metacity, GNOME Shell, Unity, Budgie, MATE, LightDM, GDM, Chrome theme, etc.
 
 Features
 --------
@@ -26,6 +26,7 @@ Requirements
 ##### Supported desktop environments are:
 - GNOME Shell 3.18 or later
 - Unity 7.4 or later
+- Budgie 10.2.5 or later
 - MATE 1.14 or later
 
 Installation
@@ -39,8 +40,8 @@ Fedora and EPEL users can also install from a [Copr repository](https://copr.fed
 
   ```sh
   cd /tmp
-  curl -sL https://github.com/nana-4/Flat-Plat/archive/v20170515.tar.gz | tar xz
-  cd Flat-Plat-20170515 && sudo ./install.sh
+  curl -sL https://github.com/nana-4/Flat-Plat/archive/v20170605.tar.gz | tar xz
+  cd Flat-Plat-20170605 && sudo ./install.sh
   ```
 
 2. Select the theme using `gnome-tweak-tool` or other suitable tools.
@@ -66,11 +67,11 @@ However, if it fails, the desktop environment may not operate correctly. So plea
 - If GNOME Shell has been updated, it will be restored to the original theme, so you will need to install this again.
 
 ### Installation
-1. First select the GTK+ theme, then back up and replace the existing `.gresource` file.
+1. Select a GTK+ theme, then run the following commands to back up and replace the existing theme file.
 
   ```sh
   GTK_THEME=$(gsettings get org.gnome.desktop.interface gtk-theme | sed "s/'//g")
-  sudo cp -iv --backup /usr/share{/themes/$GTK_THEME,}/gnome-shell/gnome-shell-theme.gresource
+  sudo cp -v --backup /usr/share{/themes/$GTK_THEME,}/gnome-shell/gnome-shell-theme.gresource
   ```
 
   > _Developer note:_  
@@ -82,26 +83,26 @@ However, if it fails, the desktop environment may not operate correctly. So plea
 1. Restore to the original theme from the backup.
 
   ```sh
-  sudo mv -iv /usr/share/gnome-shell/gnome-shell-theme.gresource{~,}
+  sudo mv -v /usr/share/gnome-shell/gnome-shell-theme.gresource{~,}
   ```
 
 2. Restart GNOME Shell. (If you are running _GNOME on Xorg_, press <kbd>Alt</kbd> + <kbd>F2</kbd> then type `r`.)
 
-Screenshots
------------
-##### GNOME Shell 3.20
-![GNOME Shell 3.20](../images/Screenshot1.png?raw=true)
-##### Unity 7.4
-![Unity 7.4](../images/Screenshot2.png?raw=true)
+Preview
+-------
+##### GNOME Shell
+![GNOME Shell](../images/gnome.png?raw=true)
+##### Budgie Desktop
+![Budgie Desktop](../images/budgie.png?raw=true)
 ##### GDM Lock Screen
-![GDM Lock Screen](../images/Screenshot3.png?raw=true)
+![GDM Lock Screen](../images/gdm-lock.png?raw=true)
 ##### GDM Unlock Screen
-![GDM Unlock Screen](../images/Screenshot4.png?raw=true)
-<sub>**Screenshots Details:** Icons: [Paper](https://github.com/snwh/paper-icon-theme) | Font: [M+ 1C](https://mplus-fonts.osdn.jp) 10.5pt | Dock's icon size: 48px + fixed | [Wallpapers](http://imgur.com/a/v2Ovx)</sub>
+![GDM Unlock Screen](../images/gdm-unlock.png?raw=true)
+<sub>**Preview Details:** Icons: [Paper](https://github.com/snwh/paper-icon-theme) | Font: [M+ 1C](https://mplus-fonts.osdn.jp) 9.75pt | Dock's icon size: 48px + fixed | [Wallpapers](http://imgur.com/a/v2Ovx)</sub>
 
 Contributing
 ------------
-If you find any bugs or mistakes, please report it to the [issue tracker](https://github.com/nana-4/Flat-Plat/issues) or send a pull request.  
+If you find bugs or have suggestions, please report it to the [issue tracker](https://github.com/nana-4/Flat-Plat/issues).  
 Any contribution will be much appreciated.
 
 Planned Features
