@@ -19,7 +19,7 @@
  */
 /* GLOBALS */
 * {
-  transition-duration: 0.15s;
+  transition-duration: 150ms;
 }
 
 stage {
@@ -83,7 +83,7 @@ stage {
 .modal-dialog-linked-button {
   min-height: 40px;
   padding: 0 16px;
-  border-top: 1px solid rgba(0, 0, 0, 0.1) !important;
+  border-top: 1px solid rgba(0, 0, 0, 0.12) !important;
   border-right-width: 0;
   font-size: 10.5pt;
   font-weight: 500;
@@ -637,7 +637,7 @@ StScrollBar StButton#vhandle:active, StScrollBar StButton#hhandle:active {
 }
 
 .audio-selection-device {
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: 2px;
 }
 
@@ -736,7 +736,7 @@ StScrollBar StButton#vhandle:active, StScrollBar StButton#hhandle:active {
 
 .popup-menu .popup-menu-item {
   spacing: 8px;
-  transition-duration: 0.1s;
+  transition-duration: 100ms;
 }
 
 .popup-menu .popup-menu-item:ltr {
@@ -777,7 +777,7 @@ StScrollBar StButton#vhandle:active, StScrollBar StButton#hhandle:active {
 .popup-menu .popup-menu-item:active {
   background-color: rgba(0, 0, 0, 0.26);
   color: rgba(0, 0, 0, 0.87);
-  transition-duration: 0.15s;
+  transition-duration: 150ms;
 }
 
 .popup-menu .popup-menu-item.selected:active {
@@ -826,7 +826,7 @@ StScrollBar StButton#vhandle:active, StScrollBar StButton#hhandle:active {
   height: 1px;
   margin: 8px 40px;
   background-color: transparent;
-  border-color: rgba(0, 0, 0, 0.1);
+  border-color: rgba(0, 0, 0, 0.12);
   border-bottom-width: 1px;
   border-bottom-style: solid;
 }
@@ -914,7 +914,7 @@ StScrollBar StButton#vhandle:active, StScrollBar StButton#hhandle:active {
 
 .switcher-list .separator {
   width: 1px;
-  background: rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.12);
 }
 
 .switcher-arrow {
@@ -1032,7 +1032,7 @@ StScrollBar StButton#vhandle:active, StScrollBar StButton#hhandle:active {
   -minimum-hpadding: 6px;
   font-weight: bold;
   color: rgba(255, 255, 255, 0.7);
-  transition-duration: 0.15s;
+  transition-duration: 150ms;
 }
 
 #panel .panel-button .app-menu-icon {
@@ -1860,7 +1860,7 @@ StScrollBar StButton#vhandle:active, StScrollBar StButton#hhandle:active {
 .list-search-result:active,
 .list-search-result:checked {
   background-color: rgba(255, 255, 255, 0.3);
-  transition-duration: 0.15s;
+  transition-duration: 150ms;
 }
 
 .app-well-app:hover .overview-icon,
@@ -1891,7 +1891,7 @@ StScrollBar StButton#vhandle:active, StScrollBar StButton#hhandle:active {
 .grid-search-result:checked .overview-icon {
   background-color: rgba(255, 255, 255, 0.3);
   box-shadow: 0 0 transparent;
-  transition-duration: 0.15s;
+  transition-duration: 150ms;
 }
 
 .app-well-app-running-dot {
@@ -1910,7 +1910,7 @@ StScrollBar StButton#vhandle:active, StScrollBar StButton#hhandle:active {
   border-radius: 2px;
   padding: 6px;
   border: none;
-  transition-duration: 0.15s;
+  transition-duration: 150ms;
   text-align: center;
 }
 
@@ -1927,7 +1927,7 @@ StScrollBar StButton#vhandle:active, StScrollBar StButton#hhandle:active {
 .show-apps:checked .show-apps-icon,
 .show-apps:focus .show-apps-icon {
   color: #FFFFFF;
-  transition-duration: 0.15s;
+  transition-duration: 150ms;
 }
 
 .app-folder-popup {
@@ -2062,7 +2062,7 @@ StScrollBar StButton#vhandle:active, StScrollBar StButton#hhandle:active {
 .notification-banner .notification-actions {
   background-color: transparent;
   padding-top: 0;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
   spacing: 1px;
 }
 
@@ -2794,7 +2794,7 @@ StScrollBar StButton#vhandle:active, StScrollBar StButton#hhandle:active {
   border: none;
   border-radius: 0;
   background-color: rgba(250, 250, 250, 0.01);
-  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.12);
 }
 
 #LookingGlassDialog .labels {
@@ -2806,7 +2806,7 @@ StScrollBar StButton#vhandle:active, StScrollBar StButton#hhandle:active {
   -minimum-hpadding: 6px;
   font-weight: bold;
   color: rgba(0, 0, 0, 0.38);
-  transition-duration: 0.15s;
+  transition-duration: 150ms;
   padding-left: 16px;
   padding-right: 16px;
   min-height: 36px;

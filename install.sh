@@ -1,30 +1,59 @@
 #!/bin/bash
+set -ueo pipefail
+#set -x
 
 repodir=$(cd $(dirname $0) && pwd)
 srcdir=${repodir}/src
 
-gnomever_major=$(gnome-shell --version | cut -d ' ' -f 3 | cut -d . -f 1)
-gnomever_minor=$(gnome-shell --version | cut -d ' ' -f 3 | cut -d . -f 2)
 
-if [ -z $gnomever_minor ]; then
-  gnomever=3.18
-elif [ -e ${srcdir}/gnome-shell/$gnomever_major.$gnomever_minor ]; then
-  gnomever=$gnomever_major.$gnomever_minor
-elif [ -e ${srcdir}/gnome-shell/$gnomever_major.$(($gnomever_minor + 1)) ]; then
-  gnomever=$gnomever_major.$(($gnomever_minor + 1))
-elif [ -e ${srcdir}/gnome-shell/$gnomever_major.$(($gnomever_minor - 1)) ]; then
-  gnomever=$gnomever_major.$(($gnomever_minor - 1))
+if [[ $(which gnome-shell > /dev/null) ]] ; then
+  gnomever_major=$(gnome-shell --version | cut -d ' ' -f 3 | cut -d . -f 1)
+  gnomever_minor=$(gnome-shell --version | cut -d ' ' -f 3 | cut -d . -f 2)
+
+  if [ -z $gnomever_minor ]; then
+    gnomever=3.18
+  elif [ -e ${srcdir}/gnome-shell/$gnomever_major.$gnomever_minor ]; then
+    gnomever=$gnomever_major.$gnomever_minor
+  elif [ -e ${srcdir}/gnome-shell/$gnomever_major.$(($gnomever_minor + 1)) ]; then
+    gnomever=$gnomever_major.$(($gnomever_minor + 1))
+  elif [ -e ${srcdir}/gnome-shell/$gnomever_major.$(($gnomever_minor - 1)) ]; then
+    gnomever=$gnomever_major.$(($gnomever_minor - 1))
+  else
+    gnomever=3.18
+  fi
 else
   gnomever=3.18
 fi
 
 echo
 
-for color in '' '-dark' '-light' ; do
-  for size in '' '-compact' ; do
+themedir_base_fallback=${destdir:-}/usr/share/themes/Flat-Plat
+themedir_base=${THEME_DIR_BASE:-$themedir_base_fallback}
+
+_COLOR_VARIANTS=(
+  ''
+  '-dark'
+  '-light'
+)
+if [ ! -z "${COLOR_VARIANTS:-}" ] ; then
+  IFS=', ' read -r -a _COLOR_VARIANTS <<< "${COLOR_VARIANTS:-}"
+fi
+_SIZE_VARIANTS=(
+  ''
+  '-compact'
+)
+if [ ! -z "${SIZE_VARIANTS:-}" ] ; then
+  IFS=', ' read -r -a _SIZE_VARIANTS <<< "${SIZE_VARIANTS:-}"
+fi
+
+for color in "${_COLOR_VARIANTS[@]}" ; do
+  for size in "${_SIZE_VARIANTS[@]}" ; do
     echo Installing Flat-Plat${color}${size} ...
 
-    themedir=${destdir}/usr/share/themes/Flat-Plat${color}${size}
+    themedir=${themedir_base}${color}${size}
+    if [[ -d ${themedir} ]] ; then
+      rm -r ${themedir}
+    fi
     install -d ${themedir}
 
     # Copy COPYING
@@ -122,7 +151,7 @@ for color in '' '-dark' '-light' ; do
         cp -ur \
           gtk${color}.css \
           ${themedir}/gtk-3.0/gtk.css
-        if [ "$color" != '-dark' ] ; then
+        if [ "$color" != '-dark' ] && [ -f gtk-dark.css ]; then
           cp -ur \
             gtk-dark.css \
             ${themedir}/gtk-3.0
@@ -136,7 +165,7 @@ for color in '' '-dark' '-light' ; do
         cp -ur \
           gtk${color}${size}.css \
           ${themedir}/gtk-${version}/gtk.css
-        if [ "$color" != '-dark' ] ; then
+        if [ "$color" != '-dark' ] && [ -f gtk-dark.css ]; then
           cp -ur \
             gtk-dark${size}.css \
             ${themedir}/gtk-${version}/gtk-dark.css
@@ -203,3 +232,5 @@ done
 
 echo
 echo Done.
+
+# vim: set tabstop=2 softtabstop=2 expandtab shiftwidth=2 smarttab:
