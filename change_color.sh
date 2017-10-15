@@ -85,7 +85,7 @@ HDR_BTN_FG=${HDR_BTN_FG-$BTN_FG}
 WM_BORDER_FOCUS=${WM_BORDER_FOCUS-$SEL_BG}
 WM_BORDER_UNFOCUS=${WM_BORDER_UNFOCUS-$MENU_BG}
 
-FLATPACK_STYLE_COMPACT=$(echo ${FLATPACK_STYLE_COMPACT-True} | tr '[:upper:]' '[:lower:]')
+MATERIA_STYLE_COMPACT=$(echo ${MATERIA_STYLE_COMPACT-True} | tr '[:upper:]' '[:lower:]')
 GTK3_GENERATE_DARK=$(echo ${GTK3_GENERATE_DARK-True} | tr '[:upper:]' '[:lower:]')
 GTK2_HIDPI=$(echo ${GTK2_HIDPI-False} | tr '[:upper:]' '[:lower:]')
 UNITY_DEFAULT_LAUNCHER_STYLE=$(echo ${UNITY_DEFAULT_LAUNCHER_STYLE-False} | tr '[:upper:]' '[:lower:]')
@@ -156,7 +156,7 @@ for FILEPATH in "${PATHLIST[@]}"; do
 		-e 's/#414f56/%MENU_BG3%/g' \
 		-e 's/$grey_50/%BTN_BG%/g' \
 		-e 's/#FAFAFA/%BTN_BG%/g' \
-		-e 's/Flat-Plat/%OUTPUT_THEME_NAME%/g' \
+		-e 's/Materia/%OUTPUT_THEME_NAME%/g' \
 		{} \; ;
 done
 
@@ -227,9 +227,9 @@ if [[ ${GTK3_GENERATE_DARK} != "true" ]] ; then
 	rm ./src/gtk-3.0/3.{20,22}/gtk-dark-compact.scss
 	rm ./src/gtk-3.0/3.{18,20,22}/gtk-dark.scss
 fi
-#if [[ ${GTK2_HIDPI} == "true" ]] ; then
-	#mv ./gtk-2.0/gtkrc.hidpi ./gtk-2.0/gtkrc
-#fi
+if [[ ${GTK2_HIDPI} == "true" ]] ; then
+	mv ./src/gtk-2.0/main.rc.hidpi ./src/gtk-2.0/main.rc
+fi
 if [[ ${EXPORT_QT5CT} = 1 ]] ; then
 	config_home=${XDG_CONFIG_HOME:-}
 	if [[ -z "${config_home}" ]] ; then
@@ -243,7 +243,7 @@ if [[ ${UNITY_DEFAULT_LAUNCHER_STYLE} == "true" ]] ; then
 	rm ./src/unity/launcher*.svg
 fi
 
-if [[ ${FLATPACK_STYLE_COMPACT}  == "true" ]] ; then
+if [[ ${MATERIA_STYLE_COMPACT}  == "true" ]] ; then
 	SIZE_VARIANTS="-compact"
 else
 	SIZE_VARIANTS=","
@@ -256,7 +256,7 @@ rm ./src/gtk-3.0/gtk-common/assets/*.png || true
 
 echo "== Rendering GTK+2 assets..."
 cd ./src/gtk-2.0
-./render-assets.sh
+GTK2_HIDPI=${GTK2_HIDPI} ./render-assets.sh
 cd ../../
 
 echo "== Rendering GTK+3 assets..."

@@ -353,7 +353,7 @@ StScrollBar {
   }
 
   .mount-question-dialog-subject {
-      max-width: 500px;
+      max-width: 34em;
   }
 
   .show-processes-dialog-subject:rtl,
@@ -406,7 +406,7 @@ StScrollBar {
 
 .prompt-dialog {
   //this is the width of the entire modal popup
-  width: 500px;
+  width: 34em;
   border: none;
 }
 
@@ -614,7 +614,7 @@ StScrollBar {
     &.selected {
       background-color: $divider_color;
       color: $fg_color;
-      transition-duration: 0s;
+      transition-duration: 0ms;
     }
     &:active {
       background-color: $track_color;
@@ -1036,10 +1036,14 @@ StScrollBar {
       margin: 2px;
       border-radius: 100px;
       &:hover,&:focus { background-color: $divider_color; }
-      // &:active { background-color: $track_color; }
-      &:active, &:selected {
+      &:active {
+        color: inherit;
+        background-color: $track_color;
+        border-color: transparent; //avoid jumparound due to today
+      }
+      &:selected {
         color: $inverse_fg_color;
-        background-color: $primary_color !important;
+        background-color: $primary_color;
         border-color: transparent; //avoid jumparound due to today
       }
       &.calendar-day-heading {  //day of week heading
@@ -1274,6 +1278,7 @@ StScrollBar {
 //close buttons
 
 .window-close {
+  transition-duration: 0ms; // FIXME: unless disable the transition, button will distort when hovering
   height: $medium_size;
   width: $medium_size;
   -st-background-image-shadow: $shadow_1;
@@ -1291,9 +1296,9 @@ StScrollBar {
 /* NETWORK DIALOGS */
 
 .nm-dialog {
-  max-height: 500px;
-  min-height: 450px;
-  min-width: 470px;
+  max-height: 34em;
+  min-height: 31em;
+  min-width: 32em;
 }
 
   .nm-dialog-content {
@@ -1524,7 +1529,7 @@ StScrollBar {
     @extend %icon_tile;
     &:focus, &:selected, &:hover {
       background-color: $inverse_divider_color;
-      transition-duration: 0s;
+      transition-duration: 0ms;
     }
     &:active, &:checked {
       background-color: $inverse_track_color;
@@ -1542,7 +1547,7 @@ StScrollBar {
     &:focus .overview-icon,
     &:selected .overview-icon {
       background-color: $inverse_divider_color;
-      transition-duration: 0s;
+      transition-duration: 0ms;
       border-image: none;
       background-image: none;
     }
@@ -1622,7 +1627,7 @@ StScrollBar {
     &:checked .page-indicator-icon {
       background-image: none;
       background-color: $inverse_fg_color;
-      transition-duration: 0s;
+      transition-duration: 0ms;
     }
     &:checked:active { background-image: none; }
   }
@@ -1887,7 +1892,7 @@ $legacy_icon_size: 24px;
   }
 
   .candidate-box {
-    transition-duration: 0s; // FIXME: needs more natural transitions
+    transition-duration: 0ms; // FIXME: needs more natural transitions
     min-height: $menuitem_size;
     padding: 0 8px;
     border-radius: 2px;

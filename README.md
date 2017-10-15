@@ -1,135 +1,124 @@
-Flat-Plat
-=========
-Flat-Plat is a [Material Design](https://material.io)-like theme for GNOME/GTK+ based desktop environments.  
-It supports GTK3, GTK2, Metacity, GNOME Shell, Unity, Budgie, MATE, LightDM, GDM, Chrome theme, etc.
+# Materia
 
-Also Flat-Plat has compatibility with [oomox](https://github.com/actionless/oomox).
+Materia (formerly Flat-Plat) is a [Material Design](https://material.io) theme for GNOME/GTK+ based desktop environments.  
+It supports GTK+ 3, GTK+ 2, GNOME Shell, Budgie, MATE, Unity, LightDM, GDM, Chrome theme, etc.
 
-Features
---------
-<img src="../images/Button.gif" alt="Button" align="right"/>
+Also Materia has compatibility with [oomox theme designer](https://github.com/actionless/oomox).
 
-- Supports ripple effect animations (only GTK3 apps).
-- Supports both light and dark variants.
-- Supports dark or light titlebar versions.
-- Supports compact version for low resolution.
-- Supports [Dash to Dock](https://github.com/micheleg/dash-to-dock) extension's theming.
-- Supports [Workspaces to Dock](https://github.com/passingthru67/workspaces-to-dock) extension's theming.
-- Supports Chrome/Chromium theme and scrollbars extension.
-- Appears more beautifully when you use a font family including `Medium` and `Light` weights.
+## Features
 
-Requirements
-------------
-- GTK+ 3.18 or later
+**Ripple effect** animations for GTK+ 3 are supported.
+
+![Button](../images/Button.gif?raw=true)
+
+**Three color variants** and **two size variants** are available.
+
+| **Materia** | **-** | **compact** |
+|:-:|:-:|:-:|
+| **-** | ![Materia](../images/Materia.png?raw=true) | ![Materia-compact](../images/Materia-compact.png?raw=true) |
+| **dark** | ![Materia-dark](../images/Materia-dark.png?raw=true) | ![Materia-dark-compact](../images/Materia-dark-compact.png?raw=true) |
+| **light** | ![Materia-light](../images/Materia-light.png?raw=true) | ![Materia-light-compact](../images/Materia-light-compact.png?raw=true) |
+
+Various **desktop environments** are supported.
+
+- GNOME Shell `>=3.18`
+- Budgie `>=10.2.5`
+- MATE `>=1.14`
+- Unity `>=7.4`
+- ... and more DEs are [planned](TODO.md#supports).
+
+## Installation
+
+#### Packages
+
+|| **Install command** |
+|:-|:-|
+| **Arch Linux** [1] | `yaourt -S materia-theme` |
+| **Fedora / EPEL** [2] | `sudo dnf copr enable tcg/themes && sudo dnf install materia-theme` |
+
+1. The [AUR package](https://aur.archlinux.org/packages/materia-theme/) is maintained by [@cthbleachbit](https://github.com/cthbleachbit).
+2. The [Copr repository](https://copr.fedorainfracloud.org/coprs/tcg/themes/) is maintained by [@LaurentTreguier](https://github.com/LaurentTreguier).
+
+#### Manual Installation
+
+Check the dependencies first.
+
+- GTK+ `>=3.18`
 - `gnome-themes-standard`
-- pixmap (or pixbuf) engine
-- murrine engine
+- Murrine engine - The package name depends on the distro.
+  - `gtk-engine-murrine` on Arch Linux
+  - `gtk-murrine-engine` on Fedora
+  - `gtk2-engine-murrine` on openSUSE
+  - `gtk2-engines-murrine` on Debian, Ubuntu, etc.
+- `glib-compile-resources` - The package name depends on the distro.
+  - `glib2` on Arch Linux
+  - `glib2-devel` on Fedora, openSUSE, etc.
+  - `libglib2.0-dev` on Debian, Ubuntu, etc.
 
-##### Build dependency:
-- `glib2` on Arch Linux
-- `glib2-devel` on Fedora, openSUSE, etc
-- `libglib2.0-dev` on Debian, Ubuntu, etc
+Install the theme with the following commands.
 
-##### Supported desktop environments are:
-- GNOME Shell 3.18 or later
-- Unity 7.4 or later
-- Budgie 10.2.5 or later
-- MATE 1.14 or later
+```sh
+cd /tmp && curl -sL https://github.com/nana-4/materia-theme/archive/v20171005.tar.gz | tar xz
+cd materia-theme-20171005
+sudo ./install.sh
+```
 
-Installation
-------------
-Arch Linux users can install from the [AUR package](https://aur.archlinux.org/packages/flatplat-theme) maintained by @cthbleachbit.
+#### Manual Uninstallation
 
-Fedora and EPEL users can also install from a [Copr repository](https://copr.fedorainfracloud.org/coprs/tcg/themes/).
+Delete the installed directories.
 
-### Manual Installation
-1. Open the terminal and run the following commands:
+```sh
+sudo rm -rf /usr/share/themes/{Materia,Flat-Plat}{,-compact,-dark,-dark-compact,-light,-light-compact}
+```
 
-  ```sh
-  cd /tmp
-  curl -sL https://github.com/nana-4/Flat-Plat/archive/v20170605.tar.gz | tar xz
-  cd Flat-Plat-20170605 && sudo ./install.sh
-  ```
+## Recommendations
 
-2. Select the theme using `gnome-tweak-tool` or other suitable tools.
+#### Font
 
-3. Optionally;
-  - Set the font size to `9.75` (= 13px at 96dpi) or `10.5` (= 14px at 96dpi).
-  - Open the `chrome` folder on `/usr/share/themes/Flat-Plat`* and drag and drop the `.crx` files onto the Chrome/Chromium _Extensions_ page.
+- To properly display the theme, use a font family including `Medium` weight (such as [Roboto](https://github.com/google/roboto) or [M+](https://mplus-fonts.osdn.jp)).
+- Set the font size to `9.75` (= 13px at 96dpi) or `10.5` (= 14px at 96dpi).
 
-### Manual Uninstallation
-- Delete the installed directories.
+#### Chrome Theme
 
-  ```sh
-  sudo rm -rf /usr/share/themes/Flat-Plat{,-compact,-dark,-dark-compact,-light,-light-compact}
-  ```
+To use the Chrome theme,
 
-GDM (Lock/Login Screen)
------------------------
-You can change the GDM theme by replacing the default GNOME Shell theme.  
-However, if it fails, the desktop environment may not operate correctly. So please **be careful** if doing this.
+1. Open the `chrome` folder on `/usr/share/themes/Materia<-variant>`.
+2. Drag and drop the `.crx` files onto the Chrome/Chromium Extensions page: `chrome://extensions`
 
-#### :warning: Cautions:
-- When applying this, other third-party GNOME Shell themes would look broken until you restore to the original theme.
-- If GNOME Shell has been updated, it will be restored to the original theme, so you will need to install this again.
+#### GDM Theme
 
-### Installation
-1. Select a GTK+ theme, then run the following commands to back up and replace the existing theme file.
+You can change the GDM (lock/login screen) theme by replacing the default GNOME Shell theme.  
+See the wiki for details: https://github.com/nana-4/materia-theme/wiki/GDM-Theme
 
-  ```sh
-  GTK_THEME=$(gsettings get org.gnome.desktop.interface gtk-theme | sed "s/'//g")
-  sudo cp -v --backup /usr/share{/themes/$GTK_THEME,}/gnome-shell/gnome-shell-theme.gresource
-  ```
+## Previews
 
-  > _Developer note:_  
-  > If you don't want to overwrite the backup on the second and subsequent runs, delete the `--backup` option.
-
-2. Restart GNOME Shell. (If you are running _GNOME on Xorg_, press <kbd>Alt</kbd> + <kbd>F2</kbd> then type `r`.)
-
-### Uninstallation
-1. Restore to the original theme from the backup.
-
-  ```sh
-  sudo mv -v /usr/share/gnome-shell/gnome-shell-theme.gresource{~,}
-  ```
-
-2. Restart GNOME Shell. (If you are running _GNOME on Xorg_, press <kbd>Alt</kbd> + <kbd>F2</kbd> then type `r`.)
-
-Preview
--------
 ##### GNOME Shell
 ![GNOME Shell](../images/gnome.png?raw=true)
+
 ##### Budgie Desktop
 ![Budgie Desktop](../images/budgie.png?raw=true)
-##### GDM Lock Screen
-![GDM Lock Screen](../images/gdm-lock.png?raw=true)
-##### GDM Unlock Screen
-![GDM Unlock Screen](../images/gdm-unlock.png?raw=true)
-<sub>**Preview Details:** Icons: [Paper](https://github.com/snwh/paper-icon-theme) | Font: [M+ 1C](https://mplus-fonts.osdn.jp) 9.75pt | Dock's icon size: 48px + fixed | [Wallpapers](http://imgur.com/a/v2Ovx)</sub>
 
-Contributing
-------------
-If you find bugs or have suggestions, please report it to the [issue tracker](https://github.com/nana-4/Flat-Plat/issues).  
-Any contribution will be much appreciated.
+##### GDM
+![GDM](../images/gdm-unlock.png?raw=true)
 
-Planned Features
-----------------
-- Supports of Xfce theme
-- Supports of Firefox theme ([in progress](https://github.com/nana-4/Flat-Plat/issues/78))
-- Supports of overlay scrollbars for Chrome/Chromium extension
-- GNOME Terminal color pallet (if possible)
-- Material Design like cursor theme
+<sub>**Preview Details:** Icons: [Paper](https://github.com/snwh/paper-icon-theme) | Font: [M+ 1C](https://mplus-fonts.osdn.jp) 9.75pt | Dock's icon size: 48px + fixed | [Wallpapers](https://imgur.com/a/v2Ovx)</sub>
 
-License
--------
-Flat-Plat is distributed under the terms of the GNU General Public License, version 2 or later. See the [`COPYING`](COPYING) file for details.
+## Contributing
 
-Credits
--------
-- This theme is based on [Adwaita](HACKING.md#useful-links) by GNOME.
+If you find bugs or have suggestions, please report it to the [issue tracker](https://github.com/nana-4/materia-theme/issues). Any contribution would be much appreciated.
+
+See also (if necessary): [`TODO.md`](TODO.md) and [`HACKING.md`](HACKING.md)
+
+## License
+
+Materia is distributed under the terms of the GNU General Public License, version 2 or later. See the [`COPYING`](COPYING) file for details.
+
+## Credits
+
+- This theme is based on [Adwaita](HACKING.md#upstream-theme-sources) by GNOME.
 - The included symbolic icons are based on [Material Design icons](https://github.com/google/material-design-icons) by Google.
 - Chrome/Chromium scrollbars extension was forked from [Adwaita-chrome-scrollbar](https://github.com/gnome-integration-team/chrome-gnome-scrollbar) by GNOME Integration Team.
 - The original concept is Google's [Material Design](https://material.io).
-- Yauhen Kirylau (@actionless) who is oomox author polished scripts and supported Flat-Plat with [oomox](https://github.com/actionless/oomox).
+- Yauhen Kirylau (@actionless) who is oomox author polished scripts and supported Materia with [oomox](https://github.com/actionless/oomox).
 
-Also thank you for every upstream developers and all contributors.
+Also thank you to all contributors and upstream developers.
