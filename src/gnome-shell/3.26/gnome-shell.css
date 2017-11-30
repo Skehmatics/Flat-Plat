@@ -1409,7 +1409,7 @@ StScrollBar StButton#vhandle:active, StScrollBar StButton#hhandle:active {
 
 .message-icon-bin > StIcon {
   color: rgba(0, 0, 0, 0.87);
-  icon-size: 16px;
+  icon-size: 1.14286em;
   -st-icon-style: requested;
   margin: 4px 0px 4px 4px;
 }
@@ -1433,7 +1433,7 @@ StScrollBar StButton#vhandle:active, StScrollBar StButton#hhandle:active {
 }
 
 .message-secondary-bin > StIcon {
-  icon-size: 16px;
+  icon-size: 1.14286em;
 }
 
 .message-title {
@@ -1573,12 +1573,15 @@ StScrollBar StButton#vhandle:active, StScrollBar StButton#hhandle:active {
 .ripple-box {
   width: 48px;
   height: 48px;
-  background-image: url("assets/corner-ripple-ltr.svg");
-  background-size: contain;
+  border-radius: 0 0 48px 0;
+  background-color: rgba(255, 255, 255, 0.3);
+  background-image: none;
+  background-size: auto;
 }
 
 .ripple-box:rtl {
-  background-image: url("assets/corner-ripple-rtl.svg");
+  border-radius: 0 0 0 48px;
+  background-image: none;
 }
 
 .popup-menu-arrow {
