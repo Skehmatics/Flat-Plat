@@ -86,7 +86,7 @@ WM_BORDER_FOCUS=${WM_BORDER_FOCUS-$SEL_BG}
 WM_BORDER_UNFOCUS=${WM_BORDER_UNFOCUS-$MENU_BG}
 
 MATERIA_STYLE_COMPACT=$(echo ${MATERIA_STYLE_COMPACT-True} | tr '[:upper:]' '[:lower:]')
-MATERIA_MENUBAR_STYLE=$(echo ${MATERIA_MENUBAR_STYLE-contrast} | tr '[:upper:]' '[:lower:]')
+MATERIA_MENUBAR_STYLE=$(echo ${MATERIA_MENUBAR_STYLE-same} | tr '[:upper:]' '[:lower:]')
 GTK3_GENERATE_DARK=$(echo ${GTK3_GENERATE_DARK-True} | tr '[:upper:]' '[:lower:]')
 GTK2_HIDPI=$(echo ${GTK2_HIDPI-False} | tr '[:upper:]' '[:lower:]')
 UNITY_DEFAULT_LAUNCHER_STYLE=$(echo ${UNITY_DEFAULT_LAUNCHER_STYLE-False} | tr '[:upper:]' '[:lower:]')
@@ -99,19 +99,11 @@ ROUNDNESS_GTK2_HIDPI=$(( ${ROUNDNESS} * 2 ))
 INACTIVE_FG=$(mix ${FG} ${BG} 0.75)
 INACTIVE_MENU_FG=$(mix ${MENU_FG} ${MENU_BG} 0.75)
 INACTIVE_TXT_FG=$(mix ${TXT_FG} ${TXT_BG} 0.75)
+INACTIVE_TXT_BG=$(mix ${TXT_BG} ${BG} 0.60)
 
 light_folder_base_fallback="$(darker ${SEL_BG} -10)"
 medium_base_fallback="$(darker ${SEL_BG} 37)"
 dark_stroke_fallback="$(darker ${SEL_BG} 50)"
-
-ICONS_LIGHT_FOLDER="${ICONS_LIGHT_FOLDER-$light_folder_base_fallback}"
-ICONS_LIGHT="${ICONS_LIGHT-$SEL_BG}"
-ICONS_MEDIUM="${ICONS_MEDIUM-$medium_base_fallback}"
-ICONS_DARK="${ICONS_DARK-$dark_stroke_fallback}"
-
-CARET1_FG="${CARET1_FG-$TXT_FG}"
-CARET2_FG="${CARET2_FG-$TXT_FG}"
-CARET_SIZE="${CARET_SIZE-0.04}"
 
 OUTPUT_THEME_NAME="${OUTPUT_THEME_NAME-oomox-$THEME}"
 DEST_PATH="$HOME/.themes/${OUTPUT_THEME_NAME/\//-}"
@@ -131,19 +123,68 @@ cd ${tempdir}
 echo "== Converting theme into template..."
 for FILEPATH in "${PATHLIST[@]}"; do
 	find "${FILEPATH}" -type f -exec sed -i'' \
-		-e 's/$grey_50/%BTN_BG%/g' \
-		-e 's/#FAFAFA/%BTN_BG%/g' \
-		-e 's/$grey_100/%BG%/g' \
-		-e 's/#F5F5F5/%BG%/g' \
-		-e 's/$grey_200/%BG2%/g' \
-		-e 's/$grey_300/%MENU_BG%/g' \
-		-e 's/#E0E0E0/%MENU_BG%/g' \
-		-e 's/$grey_400/%MENU_BG2%/g' \
-		-e 's/#BDBDBD/%MENU_BG2%/g' \
-		-e 's/$grey_900/%FG%/g' \
-		-e 's/#212121/%FG%/g' \
+		-e 's/^\(\$dark_fg_color:\).*;.*$/\1 %FG%;/g' \
+		-e 's/^\(\$light_fg_color:\).*;.*$/\1 %BG%;/g' \
+		\
+		-e 's/^\(\$fg_color:\).*;.*$/\1 %FG%;/g' \
+		-e 's/^\(\$button_fg_color:\).*;.*$/\1 %BTN_FG%;/g' \
+		-e 's/^\(\$secondary_fg_color:.*\)\$black\(.*\)\$white\(.*\)$/\1%BTN_FG%\2%BTN_FG%\3/g' \
+		-e 's/^\(\$hint_fg_color:.*\)\$black\(.*\)\$white\(.*\)$/\1%FG%\2%FG%\3/g' \
+		-e 's/^\(\$disabled_fg_color:.*\)\$black\(.*\)\$white\(.*\)$/\1%FG%\2%FG%\3/g' \
+		-e 's/^\(\$disabled_secondary_fg_color:.*\)\$black\(.*\)\$white\(.*\)$/\1%BTN_FG%\2%BTN_FG%\3/g' \
+		-e 's/^\(\$track_color:.*\)\$black\(.*\)\$white\(.*\)$/\1%FG%\2%FG%\3/g' \
+		-e 's/^\(\$divider_color:.*\)\$black\(.*\)\$white\(.*\)$/\1%FG%\2%FG%\3/g' \
+		\
+		-e 's/^\(\$titlebar_fg_color:\).*;.*$/\1 %MENU_FG%;/g' \
+		-e 's/^\(\$titlebar_secondary_fg_color:.*\)\$black\(.*\)\$white\(.*\)$/\1%MENU_FG%\2%MENU_FG%\3/g' \
+		-e 's/^\(\$titlebar_hint_fg_color:.*\)\$black\(.*\)\$white\(.*\)$/\1%MENU_FG%\2%MENU_FG%\3/g' \
+		-e 's/^\(\$titlebar_disabled_fg_color:.*\)\$black\(.*\)\$white\(.*\)$/\1%MENU_FG%\2%MENU_FG%\3/g' \
+		-e 's/^\(\$titlebar_disabled_secondary_fg_color:.*\)\$black\(.*\)\$white\(.*\)$/\1%MENU_FG%\2%MENU_FG%\3/g' \
+		-e 's/^\(\$titlebar_track_color:.*\)\$black\(.*\)\$white\(.*\)$/\1%MENU_FG%\2%MENU_FG%\3/g' \
+		-e 's/^\(\$titlebar_divider_color:.*\)\$black\(.*\)\$white\(.*\)$/\1%MENU_FG%\2%MENU_FG%\3/g' \
+		\
+		-e 's/^\(\$inverse_fg_color:\).*;.*$/\1 %SEL_FG%;/g' \
+		-e 's/^\(\$inverse_secondary_fg_color:.*\)$white\(.*\)$/\1%SEL_FG%\2/g' \
+		-e 's/^\(\$inverse_hint_fg_color:.*\)\$white\(.*\)$/\1%SEL_FG%\2/g' \
+		-e 's/^\(\$inverse_disabled_fg_color:.*\)\$white\(.*\)$/\1%SEL_FG%\2/g' \
+		-e 's/^\(\$inverse_disabled_secondary_fg_color:.*\)\$white\(.*\)$/\1%SEL_FG%\2/g' \
+		-e 's/^\(\$inverse_track_color:.*\)\$white\(.*\)$/\1%SEL_FG%\2/g' \
+		-e 's/^\(\$inverse_divider_color:.*\)\$white\(.*\)$/\1%SEL_FG%\2/g' \
+		\
+		-e 's/^\(\$bg_color:.*\$variant.*\)\$\w\+\(.*\)\$\w\+\(.*\)$/\1%BG%\2%MENU_BG%\3/g' \
+		-e 's/^\(\$base_color:.*\$variant.*\)\$\w\+\(.*\)\$\w\+\(.*\)$/\1%TXT_BG%\2%MENU_BG%\3/g' \
+		-e 's/^\(\$alt_base_color:.*\$variant.*\)\$\w\+\(.*\)\$\w\+\(.*\)\$\w\+\(.*\)$/\1%INACTIVE_TXT_BG%\2%INACTIVE_TXT_BG%\3%MENU_BG%\4/g' \
+		-e 's/^\(\$lighter_bg_color:.*\$variant.*\)\$\w\+\(.*\)\$\w\+\(.*\)$/\1%BTN_BG%\2%BTN_BG%\3/g' \
+		-e 's/^\(\$darker_bg_color:.*\$variant.*\)\$\w\+\(.*\)\$\w\+\(.*\)$/\1%BG%\2%MENU_BG%\3/g' \
+		\
+		-e 's/^\(\$titlebar_bg_color:\).*;.*$/\1 %MENU_BG%;/g' \
+		-e 's/^\(\$alt_titlebar_bg_color:.*\$titlebar.*\)\$\w\+\(.*\)\$\w\+\(.*\)$/\1%MENU_BG%\2%MENU_BG%\3/g' \
+		-e 's/^\(\$panel_bg_color:.*\)$black\(.*\)$/\1%MENU_BG%\2/g' \
+		-e 's/^\(\$solid_panel_bg_color:.*\$titlebar.*\)\$\w\+\(.*\)\$\w\+\(.*\)$/\1%MENU_BG%\2%MENU_BG%\3/g' \
+		-e 's/^\(\$opaque_panel_bg_color:.*\$titlebar.*\)\$\w\+\(.*\)\$\w\+\(.*\)\$\w\+\(.*\)$/\1%MENU_BG%\2%MENU_BG%\3%MENU_BG%\4/g' \
+		-e 's/^\(\$alt_panel_bg_color:.*\)$black\(.*\)$/\1%MENU_BG%\2/g' \
+		\
+		-e 's/^\(\$primary_color:\).*;.*$/\1 %SEL_BG%;/g' \
+		-e 's/^\(\$alt_primary_color:\).*;.*$/\1 %SEL_BG2%;/g' \
+		-e 's/^\(\$accent_color:\).*;.*$/\1 %ACCENT_BG%;/g' \
+		\
+		-e 's/^\(\$titlebar_highlight_color:\).*;.*$/\1 %MENU_BG%;/g' \
+		\
 		-e 's/$black/%FG%/g' \
 		-e 's/#000000/%FG%/g' \
+		-e 's/$grey_900/%FG%/g' \
+		-e 's/#212121/%FG%/g' \
+		-e 's/$grey_500/%INACTIVE_FG%/g' \
+		-e 's/$9E9E9E/%INACTIVE_FG%/g' \
+		-e 's/$grey_400/%MENU_BG2%/g' \
+		-e 's/#BDBDBD/%MENU_BG2%/g' \
+		-e 's/$grey_300/%SEL_BG%/g' \
+		-e 's/#E0E0E0/%SEL_BG%/g' \
+		-e 's/$grey_200/%BG2%/g' \
+		-e 's/$grey_100/%BG%/g' \
+		-e 's/#F5F5F5/%BG%/g' \
+		-e 's/$grey_50/%BTN_BG%/g' \
+		-e 's/#FAFAFA/%BTN_BG%/g' \
 		-e 's/$pink_A200/%ACCENT_BG%/g' \
 		-e 's/#FF4081/%ACCENT_BG%/g' \
 		-e 's/$blue_400/%SEL_BG%/g' \
@@ -163,26 +204,19 @@ for FILEPATH in "${PATHLIST[@]}"; do
 done
 
 #Not implemented yet:
-		#-e 's/%SEL_FG%/'"$SEL_FG"'/g' \
-		#-e 's/%MENU_FG%/'"$MENU_FG"'/g' \
-		#-e 's/%BTN_FG%/'"$BTN_FG"'/g' \
 		#-e 's/%HDR_BTN_BG%/'"$HDR_BTN_BG"'/g' \
 		#-e 's/%HDR_BTN_FG%/'"$HDR_BTN_FG"'/g' \
 		#-e 's/%WM_BORDER_FOCUS%/'"$WM_BORDER_FOCUS"'/g' \
 		#-e 's/%WM_BORDER_UNFOCUS%/'"$WM_BORDER_UNFOCUS"'/g' \
 		#-e 's/%ROUNDNESS%/'"$ROUNDNESS"'/g' \
-		#-e 's/%ROUNDNESS_GTK2_HIDPI%/'"$ROUNDNESS_GTK2_HIDPI"'/g' \
 		#-e 's/%SPACING%/'"$SPACING"'/g' \
-		#-e 's/%GRADIENT%/'"$GRADIENT"'/g' \
 		#-e 's/%INACTIVE_FG%/'"$INACTIVE_FG"'/g' \
 		#-e 's/%INACTIVE_TXT_FG%/'"$INACTIVE_TXT_FG"'/g' \
 		#-e 's/%INACTIVE_MENU_FG%/'"$INACTIVE_MENU_FG"'/g' \
-		#-e 's/%ICONS_DARK%/'"$ICONS_DARK"'/g' \
-		#-e 's/%ICONS_MEDIUM%/'"$ICONS_MEDIUM"'/g' \
-		#-e 's/%ICONS_LIGHT%/'"$ICONS_LIGHT"'/g' \
-		#-e 's/%ICONS_LIGHT_FOLDER%/'"$ICONS_LIGHT_FOLDER"'/g' \
 
-#echo "You can debug TEMP DIR: ${tempdir}, press [Enter] when finish" && read
+if [[ ! -z "${DEBUG:-}" ]] ; then
+	echo "You can debug TEMP DIR: ${tempdir}, press [Enter] when finish" && read
+fi
 
 echo "== Filling the template with the new colorscheme..."
 for FILEPATH in "${PATHLIST[@]}"; do
@@ -207,16 +241,11 @@ for FILEPATH in "${PATHLIST[@]}"; do
 		-e 's/%WM_BORDER_FOCUS%/#'"$WM_BORDER_FOCUS"'/g' \
 		-e 's/%WM_BORDER_UNFOCUS%/#'"$WM_BORDER_UNFOCUS"'/g' \
 		-e 's/%ROUNDNESS%/'"$ROUNDNESS"'/g' \
-		-e 's/%ROUNDNESS_GTK2_HIDPI%/'"$ROUNDNESS_GTK2_HIDPI"'/g' \
 		-e 's/%SPACING%/'"$SPACING"'/g' \
-		-e 's/%GRADIENT%/'"$GRADIENT"'/g' \
 		-e 's/%INACTIVE_FG%/#'"$INACTIVE_FG"'/g' \
 		-e 's/%INACTIVE_TXT_FG%/#'"$INACTIVE_TXT_FG"'/g' \
+		-e 's/%INACTIVE_TXT_BG%/#'"$INACTIVE_TXT_BG"'/g' \
 		-e 's/%INACTIVE_MENU_FG%/#'"$INACTIVE_MENU_FG"'/g' \
-		-e 's/%ICONS_DARK%/#'"$ICONS_DARK"'/g' \
-		-e 's/%ICONS_MEDIUM%/#'"$ICONS_MEDIUM"'/g' \
-		-e 's/%ICONS_LIGHT%/#'"$ICONS_LIGHT"'/g' \
-		-e 's/%ICONS_LIGHT_FOLDER%/#'"$ICONS_LIGHT_FOLDER"'/g' \
 		-e 's/%OUTPUT_THEME_NAME%/'"$OUTPUT_THEME_NAME"'/g' \
 		{} \; ;
 done
@@ -279,10 +308,12 @@ cd ../../..
 SIZE_VARIANTS="${SIZE_VARIANTS}" COLOR_VARIANTS="${COLOR_VARIANTS}" THEME_DIR_BASE=${DEST_PATH} ./install.sh
 
 GENERATED_PATH="${DEST_PATH}$(tr -d ',' <<<${COLOR_VARIANTS})$(tr -d ',' <<<${SIZE_VARIANTS})"
-if [[ -d "${DEST_PATH}" ]] ; then
-	rm -r "${DEST_PATH}"
+if [[ ! "${GENERATED_PATH}" = "${DEST_PATH}" ]] ; then
+	if [[ -d "${DEST_PATH}" ]] ; then
+		rm -r "${DEST_PATH}"
+	fi
+	mv "${GENERATED_PATH}" "${DEST_PATH}"
 fi
-mv "${GENERATED_PATH}" "${DEST_PATH}"
 
 echo
 echo "== SUCCESS"
