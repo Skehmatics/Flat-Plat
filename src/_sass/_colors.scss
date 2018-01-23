@@ -44,9 +44,9 @@ $inverse_divider_color:               rgba($white, 0.12);
 $bg_color:         if($variant == 'light', $grey_100, #303030);
 $base_color:       if($variant == 'light', $white,    $grey_800);
 $alt_base_color:   if($variant == 'light', $grey_50,  mix($base_color, $bg_color, 50%));
-$lighter_bg_color: if($variant == 'light', $grey_50,  fade($grey_500));
-$alt_lighter_bg_color: if($variant == 'light', $grey_200, fade($grey_600)); // for gnome-shell sub menu
-$darker_bg_color:  if($variant == 'light', $grey_200, fade($grey_900));
+$lighter_bg_color: if($variant == 'light', $grey_50,  mix($grey_700, $grey_800, 50%));
+$alt_lighter_bg_color: if($variant == 'light', $grey_200, $grey_800); // for gnome-shell sub menu
+$darker_bg_color:  if($variant == 'light', $grey_200, $grey_900);
 
 $titlebar_bg_color:     if($titlebar == 'dark', if($variant == 'light', $blue_grey_700, $grey_900), $grey_300);
 $alt_titlebar_bg_color: if($titlebar == 'dark', $grey_800, $grey_300);
