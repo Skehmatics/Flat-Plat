@@ -16,6 +16,7 @@ print_usage() {
 	echo "examples:"
 	echo "       $0 -o my-theme-name <(echo -e "BG=d8d8d8\\nFG=101010\\nMENU_BG=3c3c3c\\nMENU_FG=e6e6e6\\nSEL_BG=ad7fa8\\nSEL_FG=ffffff\\nTXT_BG=ffffff\\nTXT_FG=1a1a1a\\nBTN_BG=f5f5f5\\nBTN_FG=111111\\n")"
 	echo "       $0 ../colors/retro/twg"
+	echo "       $0 --hidpi True ../colors/retro/clearlooks"
 	exit 1
 }
 
@@ -29,6 +30,10 @@ do
 		;;
 		-o|--output)
 			OUTPUT_THEME_NAME="${2}"
+			shift
+		;;
+		-d|--hidpi)
+			OPTION_GTK2_HIDPI="${2}"
 			shift
 		;;
 		*)
@@ -48,14 +53,18 @@ if [[ -z "${THEME:-}" ]] ; then
 fi
 
 PATHLIST=(
+	'./src/chrome'
+	'./src/gnome-shell'
 	'./src/gtk-2.0/gtkrc'
 	'./src/gtk-2.0/gtkrc-dark'
 	'./src/gtk-2.0/gtkrc-light'
-	'./src/gtk-3.0/3.22/sass/_colors.scss'
-	'./src/gnome-shell/3.18/sass/_colors.scss'
+	'./src/_sass/_colors.scss'
 	'./src/gtk-2.0/assets.svg'
 	'./src/gtk-2.0/assets-dark.svg'
-	'./src/gtk-3.0/gtk-common/assets.svg'
+	'./src/gtk/assets.svg'
+	'./src/metacity-1'
+	'./src/unity'
+	'./src/xfwm4'
 )
 if [ ! -z "${CUSTOM_PATHLIST:-}" ] ; then
 	IFS=', ' read -r -a PATHLIST <<< "${CUSTOM_PATHLIST:-}"
@@ -67,6 +76,9 @@ for FILEPATH in "${PATHLIST[@]}"; do
 		EXPORT_QT5CT=1
 	fi
 done
+
+OPTION_GTK2_HIDPI=$(echo ${OPTION_GTK2_HIDPI-False} | tr '[:upper:]' '[:lower:]')
+
 
 if [[ ${THEME} == */* ]] || [[ ${THEME} == *.* ]] ; then
 	source "$THEME"
@@ -88,16 +100,17 @@ WM_BORDER_UNFOCUS=${WM_BORDER_UNFOCUS-$MENU_BG}
 MATERIA_STYLE_COMPACT=$(echo ${MATERIA_STYLE_COMPACT-True} | tr '[:upper:]' '[:lower:]')
 MATERIA_MENUBAR_STYLE=$(echo ${MATERIA_MENUBAR_STYLE-same} | tr '[:upper:]' '[:lower:]')
 GTK3_GENERATE_DARK=$(echo ${GTK3_GENERATE_DARK-True} | tr '[:upper:]' '[:lower:]')
-GTK2_HIDPI=$(echo ${GTK2_HIDPI-False} | tr '[:upper:]' '[:lower:]')
 UNITY_DEFAULT_LAUNCHER_STYLE=$(echo ${UNITY_DEFAULT_LAUNCHER_STYLE-False} | tr '[:upper:]' '[:lower:]')
 
 SPACING=${SPACING-3}
 GRADIENT=${GRADIENT-0}
 ROUNDNESS=${ROUNDNESS-2}
 ROUNDNESS_GTK2_HIDPI=$(( ${ROUNDNESS} * 2 ))
+GNOME_SHELL_PANEL_OPACITY=${GNOME_SHELL_PANEL_OPACITY-0.6}
 
 INACTIVE_FG=$(mix ${FG} ${BG} 0.75)
 INACTIVE_MENU_FG=$(mix ${MENU_FG} ${MENU_BG} 0.75)
+INACTIVE_MENU_BG=$(mix ${MENU_BG} ${MENU_FG} 0.75)
 INACTIVE_TXT_FG=$(mix ${TXT_FG} ${TXT_BG} 0.75)
 INACTIVE_TXT_BG=$(mix ${TXT_BG} ${BG} 0.60)
 
@@ -121,13 +134,14 @@ cd ${tempdir}
 
 
 echo "== Converting theme into template..."
+
 for FILEPATH in "${PATHLIST[@]}"; do
-	find "${FILEPATH}" -type f -exec sed -i'' \
-		-e 's/^\(\$dark_fg_color:\).*;.*$/\1 %FG%;/g' \
-		-e 's/^\(\$light_fg_color:\).*;.*$/\1 %BG%;/g' \
+	find "${FILEPATH}" -type f -not -name '_color-palette.scss' -exec sed -i'' \
+		-e 's/^\(\$dark_fg_color:\).*$.*;.*$/\1 %FG%;/g' \
+		-e 's/^\(\$light_fg_color:\).*$.*;.*$/\1 %BG%;/g' \
 		\
-		-e 's/^\(\$fg_color:\).*;.*$/\1 %FG%;/g' \
-		-e 's/^\(\$button_fg_color:\).*;.*$/\1 %BTN_FG%;/g' \
+		-e 's/^\(\$fg_color:\).*$.*;.*$/\1 %FG%;/g' \
+		-e 's/^\(\$button_fg_color:\).*$.*;.*$/\1 %BTN_FG%;/g' \
 		-e 's/^\(\$secondary_fg_color:.*\)\$black\(.*\)\$white\(.*\)$/\1%BTN_FG%\2%BTN_FG%\3/g' \
 		-e 's/^\(\$hint_fg_color:.*\)\$black\(.*\)\$white\(.*\)$/\1%FG%\2%FG%\3/g' \
 		-e 's/^\(\$disabled_fg_color:.*\)\$black\(.*\)\$white\(.*\)$/\1%FG%\2%FG%\3/g' \
@@ -143,7 +157,7 @@ for FILEPATH in "${PATHLIST[@]}"; do
 		-e 's/^\(\$titlebar_track_color:.*\)\$black\(.*\)\$white\(.*\)$/\1%MENU_FG%\2%MENU_FG%\3/g' \
 		-e 's/^\(\$titlebar_divider_color:.*\)\$black\(.*\)\$white\(.*\)$/\1%MENU_FG%\2%MENU_FG%\3/g' \
 		\
-		-e 's/^\(\$inverse_fg_color:\).*;.*$/\1 %SEL_FG%;/g' \
+		-e 's/^\(\$inverse_fg_color:\).*$.*;.*$/\1 %SEL_FG%;/g' \
 		-e 's/^\(\$inverse_secondary_fg_color:.*\)$white\(.*\)$/\1%SEL_FG%\2/g' \
 		-e 's/^\(\$inverse_hint_fg_color:.*\)\$white\(.*\)$/\1%SEL_FG%\2/g' \
 		-e 's/^\(\$inverse_disabled_fg_color:.*\)\$white\(.*\)$/\1%SEL_FG%\2/g' \
@@ -159,7 +173,7 @@ for FILEPATH in "${PATHLIST[@]}"; do
 		\
 		-e 's/^\(\$titlebar_bg_color:\).*;.*$/\1 %MENU_BG%;/g' \
 		-e 's/^\(\$alt_titlebar_bg_color:.*\$titlebar.*\)\$\w\+\(.*\)\$\w\+\(.*\)$/\1%MENU_BG%\2%MENU_BG%\3/g' \
-		-e 's/^\(\$panel_bg_color:.*\)$black\(.*\)$/\1%MENU_BG%\2/g' \
+		-e 's/^\(\$panel_bg_color:.*\)$black\(.*\)$middle_opacity\(.*\)$/\1%MENU_BG%\2%GNOME_SHELL_PANEL_OPACITY%\3/g' \
 		-e 's/^\(\$solid_panel_bg_color:.*\$titlebar.*\)\$\w\+\(.*\)\$\w\+\(.*\)$/\1%MENU_BG%\2%MENU_BG%\3/g' \
 		-e 's/^\(\$opaque_panel_bg_color:.*\$titlebar.*\)\$\w\+\(.*\)\$\w\+\(.*\)\$\w\+\(.*\)$/\1%MENU_BG%\2%MENU_BG%\3%MENU_BG%\4/g' \
 		-e 's/^\(\$alt_panel_bg_color:.*\)$black\(.*\)$/\1%MENU_BG%\2/g' \
@@ -175,7 +189,9 @@ for FILEPATH in "${PATHLIST[@]}"; do
 		-e 's/$grey_900/%FG%/g' \
 		-e 's/#212121/%FG%/g' \
 		-e 's/$grey_500/%INACTIVE_FG%/g' \
-		-e 's/$9E9E9E/%INACTIVE_FG%/g' \
+		-e 's/#757575/%INACTIVE_FG%/g' \
+		-e 's/#9E9E9E/%INACTIVE_FG%/g' \
+		-e 's/#c3c8ca/%INACTIVE_FG%/g' \
 		-e 's/$grey_400/%MENU_BG2%/g' \
 		-e 's/#BDBDBD/%MENU_BG2%/g' \
 		-e 's/$grey_300/%SEL_BG%/g' \
@@ -193,8 +209,10 @@ for FILEPATH in "${PATHLIST[@]}"; do
 		-e 's/$white/%TXT_BG%/g' \
 		-e 's/#FFFFFF/%TXT_BG%/g' \
 		-e 's/$blue_grey_700/%MENU_BG%/g' \
+		-e 's/$blue_grey_600/%MENU_BG%/g' \
 		-e 's/#333e43/%MENU_BG%/g' \
 		-e 's/#455A64/%MENU_BG%/g' \
+		-e 's/#37474F/%MENU_BG%/g' \
 		-e 's/$blue_grey_800/%MENU_BG2%/g' \
 		-e 's/#3b484e/%MENU_BG2%/g' \
 		-e 's/$blue_grey_900/%MENU_BG3%/g' \
@@ -246,23 +264,25 @@ for FILEPATH in "${PATHLIST[@]}"; do
 		-e 's/%INACTIVE_TXT_FG%/#'"$INACTIVE_TXT_FG"'/g' \
 		-e 's/%INACTIVE_TXT_BG%/#'"$INACTIVE_TXT_BG"'/g' \
 		-e 's/%INACTIVE_MENU_FG%/#'"$INACTIVE_MENU_FG"'/g' \
+		-e 's/%INACTIVE_MENU_BG%/#'"$INACTIVE_MENU_BG"'/g' \
+		-e 's/%GNOME_SHELL_PANEL_OPACITY%/'"$GNOME_SHELL_PANEL_OPACITY"'/g' \
 		-e 's/%OUTPUT_THEME_NAME%/'"$OUTPUT_THEME_NAME"'/g' \
 		{} \; ;
 done
 
-rm ./src/gtk-3.0/3.{18,20,22}/*.css
+rm ./src/gtk/3.{18,20,22}/*.css
 if [[ ${MATERIA_MENUBAR_STYLE}  == "contrast" ]] ; then
-	rm ./src/gtk-3.0/3.{18,20,22}/gtk-light*.scss
+	rm ./src/gtk/3.{18,20,22}/gtk-light*.scss
 else
-	rm ./src/gtk-3.0/3.{18,20,22}/gtk{,-compact}.scss || true
+	rm ./src/gtk/3.{18,20,22}/gtk{,-compact}.scss || true
 fi
 if [[ ${GTK3_GENERATE_DARK} != "true" ]] ; then
-	grep -v "\-dark" ./src/gtk-3.0/gtk-common/assets.txt > ./new_assets.txt
-	mv ./new_assets.txt ./src/gtk-3.0/gtk-common/assets.txt
-	rm ./src/gtk-3.0/3.{20,22}/gtk-dark-compact.scss
-	rm ./src/gtk-3.0/3.{18,20,22}/gtk-dark.scss
+	grep -v "\-dark" ./src/gtk/assets.txt > ./new_assets.txt
+	mv ./new_assets.txt ./src/gtk/assets.txt
+	rm ./src/gtk/3.{20,22}/gtk-dark-compact.scss
+	rm ./src/gtk/3.{18,20,22}/gtk-dark.scss
 fi
-if [[ ${GTK2_HIDPI} == "true" ]] ; then
+if [[ ${OPTION_GTK2_HIDPI} == "true" ]] ; then
 	mv ./src/gtk-2.0/main.rc.hidpi ./src/gtk-2.0/main.rc
 fi
 if [[ ${EXPORT_QT5CT} = 1 ]] ; then
@@ -280,32 +300,36 @@ fi
 
 if [[ ${MATERIA_STYLE_COMPACT}  == "true" ]] ; then
 	SIZE_VARIANTS="-compact"
+	SIZE_VARIANT="compact"
 else
 	SIZE_VARIANTS=","
+	SIZE_VARIANT="standard"
 fi
 if [[ ${MATERIA_MENUBAR_STYLE}  == "contrast" ]] ; then
 	COLOR_VARIANTS=","
+	COLOR_VARIANT="standard"
 else
 	COLOR_VARIANTS="-light"
+	COLOR_VARIANT="light"
 fi
 
 SIZE_VARIANTS="${SIZE_VARIANTS}" COLOR_VARIANTS="${COLOR_VARIANTS}" THEME_DIR_BASE=${DEST_PATH} ./parse-sass.sh
 
 rm ./src/gtk-2.0/assets/*.png || true
 rm ./src/gtk-2.0/assets-dark/*.png || true
-rm ./src/gtk-3.0/gtk-common/assets/*.png || true
+rm ./src/gtk/assets/*.png || true
 
 echo "== Rendering GTK+2 assets..."
 cd ./src/gtk-2.0
-GTK2_HIDPI=${GTK2_HIDPI} ./render-assets.sh
+GTK2_HIDPI=${OPTION_GTK2_HIDPI} ./render-assets.sh
 cd ../../
 
 echo "== Rendering GTK+3 assets..."
-cd ./src/gtk-3.0/gtk-common
+cd ./src/gtk
 ./render-assets.sh
-cd ../../..
+cd ../../
 
-SIZE_VARIANTS="${SIZE_VARIANTS}" COLOR_VARIANTS="${COLOR_VARIANTS}" THEME_DIR_BASE=${DEST_PATH} ./install.sh
+./install.sh --dest "$HOME/.themes" --name "${OUTPUT_THEME_NAME/\//-}" --color "${COLOR_VARIANT}" --size "${SIZE_VARIANT}"
 
 GENERATED_PATH="${DEST_PATH}$(tr -d ',' <<<${COLOR_VARIANTS})$(tr -d ',' <<<${SIZE_VARIANTS})"
 if [[ ! "${GENERATED_PATH}" = "${DEST_PATH}" ]] ; then

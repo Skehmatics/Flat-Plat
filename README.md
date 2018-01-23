@@ -7,11 +7,11 @@ Also Materia has compatibility with [oomox theme designer](https://github.com/ac
 
 ## Features
 
-**Ripple effect** animations for GTK+ 3 are supported.
+**Ripple effect** animations for GTK+ 3 are supported:
 
 ![Button](../images/Button.gif?raw=true)
 
-**Three color variants** and **two size variants** are available.
+**Three color variants** and **two size variants** are available:
 
 | **Materia** | **-** | **compact** |
 |:-:|:-:|:-:|
@@ -19,13 +19,29 @@ Also Materia has compatibility with [oomox theme designer](https://github.com/ac
 | **dark** | ![Materia-dark](../images/Materia-dark.png?raw=true) | ![Materia-dark-compact](../images/Materia-dark-compact.png?raw=true) |
 | **light** | ![Materia-light](../images/Materia-light.png?raw=true) | ![Materia-light-compact](../images/Materia-light-compact.png?raw=true) |
 
-Various **desktop environments** are supported.
+Various **desktop environments** are supported:
 
 - GNOME Shell `>=3.18`
 - Budgie `>=10.2.5`
 - MATE `>=1.14`
 - Unity `>=7.4`
 - ... and more DEs are [planned](TODO.md#supports).
+
+## Requirements
+
+- GTK+ `>=3.18`
+- `gnome-themes-standard`
+- Murrine engine - The package name depends on the distro.
+  - `gtk-engine-murrine` on Arch Linux
+  - `gtk-murrine-engine` on Fedora
+  - `gtk2-engine-murrine` on openSUSE
+  - `gtk2-engines-murrine` on Debian, Ubuntu, etc.
+- `glib-compile-resources` - The package name depends on the distro.
+  - `glib2` on Arch Linux
+  - `glib2-devel` on Fedora, openSUSE, etc.
+  - `libglib2.0-dev` on Debian, Ubuntu, etc.
+
+For Ubuntu, you'll also need the `libxml2-utils` package.
 
 ## Installation
 
@@ -41,23 +57,7 @@ Various **desktop environments** are supported.
 
 #### Manual Installation
 
-Check the dependencies first:
-
-- GTK+ `>=3.18`
-- `gnome-themes-standard`
-- Murrine engine - The package name depends on the distro.
-  - `gtk-engine-murrine` on Arch Linux
-  - `gtk-murrine-engine` on Fedora
-  - `gtk2-engine-murrine` on openSUSE
-  - `gtk2-engines-murrine` on Debian, Ubuntu, etc.
-- `glib-compile-resources` - The package name depends on the distro.
-  - `glib2` on Arch Linux
-  - `glib2-devel` on Fedora, openSUSE, etc.
-  - `libglib2.0-dev` on Debian, Ubuntu, etc.
-
-Did you get the error: `XMLLINT not set and xmllint not found in path`? Then you'll also need to install `libxml2-utils`.
-
-Install the theme with the following commands:
+Run the following commands in the terminal:
 
 ```sh
 cd /tmp && wget -qO - https://github.com/nana-4/materia-theme/archive/master.tar.gz | tar xz
@@ -65,12 +65,33 @@ cd materia-theme-master
 sudo ./install.sh
 ```
 
+#### Custom Installation
+
+`./install.sh` allows the following options:
+
+```
+-d, --dest DIR           Specify theme destination directory (Default: /usr/share/themes)
+-n, --name NAME          Specify theme name (Default: Materia)
+-c, --color VARIANTS...  Specify theme color variant(s) [standard|dark|light] (Default: All variants)
+-s, --size VARIANT       Specify theme size variant [standard|compact] (Default: All variants)
+```
+
+For example, to install only `Materia-dark` into `~/.themes`, run:
+
+```sh
+./install.sh -c dark -s standard -d ~/.themes
+```
+
+For further details, run `./install.sh --help`.
+
+To change the color scheme of the theme, see [the page](HACKING.md#changing-the-color-scheme-with-script).
+
 #### Manual Uninstallation
 
 Delete the installed directories:
 
 ```sh
-sudo rm -rf /usr/share/themes/{Materia,Flat-Plat}{,-compact,-dark,-dark-compact,-light,-light-compact}
+sudo rm -rf /usr/share/themes/Materia{,-compact,-dark,-dark-compact,-light,-light-compact}
 ```
 
 ## Recommendations
@@ -122,5 +143,6 @@ Materia is distributed under the terms of the GNU General Public License, versio
 - Chrome/Chromium scrollbars extension was forked from [Adwaita-chrome-scrollbar](https://github.com/gnome-integration-team/chrome-gnome-scrollbar) by GNOME Integration Team.
 - The original concept is Google's [Material Design](https://material.io).
 - Yauhen Kirylau (@actionless) who is oomox author polished scripts and supported Materia with [oomox](https://github.com/actionless/oomox).
+- @n3oxmind helped improve the installation script.
 
 Also thank you to all contributors and upstream developers.
