@@ -83,15 +83,15 @@
     </linearGradient>
 
     <linearGradient id="color-accent">
-      <stop stop-color="#FF4081"/>
+      <stop stop-color="#009688"/>
     </linearGradient>
 
     <linearGradient id="color-accent-disabled">
-      <stop stop-color="#FF4081" stop-opacity="0.5"/>
+      <stop stop-color="#009688" stop-opacity="0.5"/>
     </linearGradient>
 
     <linearGradient id="color-bg">
-      <stop stop-color="#F5F5F5"/>
+      <stop stop-color="#EEEEEE"/>
     </linearGradient>
 
     <linearGradient id="color-bg-dark">
